@@ -1,0 +1,98 @@
+﻿@model IEnumerable<AgendaApp.Entidades.UsuarioAtivo>
+<head>
+    @{
+        ViewBag.Title = "Index";
+    }
+    <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
+    <title>Listar</title>
+</head>
+
+<body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
+    <h4>Usuários Ativos</h4>
+    <button class="btn-floating btn-large waves-effect waves-light light-blue darken-3" type="submit" onclick="location.href='@Url.Action("Inserir", "UsuarioAtivo")'">
+        <i class="material-icons">add</i>
+    </button>
+    <table class="table-responsive">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
+                    <td>
+                        @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                        @Html.ActionLink("Visualizar", "Visualizar", new { id = item.Id }) |
+                        <a class="modal-trigger" ng-click='recuperarDados(@item.Id)' href="#modal1">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+            <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Excluir</h4>
+                    <p>Deseja deletar os dados abaixo?</p>
+                    <div class="card-panel blue darken-4 white-text ">
+                        <h5>Informações:</h5>
+                        <p><i class="material-icons left">label_outline</i>Nome: {{nome}}</p>
+                        <p><i class="material-icons left">label_outline</i>Email: {{email}}</p>
+                        <p><i class="material-icons left">label_outline</i>Sexo: {{sexo}}</p>
+                        <p><i class="material-icons left">label_outline</i>Tel: {{telefone}}</p>
+                        <p><i class="material-icons left">label_outline</i>Endereço: {{endereco}}</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat left">Cancelar</a>
+                    <a ng-click='excluir()' class="modal-action modal-close waves-effect waves-green btn-flat">Excluir</a>
+                </div>
+            </div>
+        }
+    </table>
+
+
+</body>
+
+@*<body ng-app="mymodal">
+        <div ng-controller="MainCtrl">
+            <button ng-click="toggleModal()" class="btn btn-default">Open modal</button>
+
+            <modal visible="showModal">
+                <h4>Excluir</h4>
+                <p>Deseja deletar os dados abaixo?</p>
+                <div class="card-panel blue darken-4 white-text ">
+                    <h5>Informações:</h5>
+                    <p><i class="material-icons left">label_outline</i>Nome: {{}}</p>
+                    <p><i class="material-icons left">label_outline</i>Email: {{}}</p>
+                    <p><i class="material-icons left">label_outline</i>Tel: {{}}</p>
+                    <p><i class="material-icons left">label_outline</i>Ocupação: {{}}</p>
+                    <p><i class="material-icons left">label_outline</i>CPF: {{}}</p>
+                    <p><i class="material-icons left">label_outline</i>RG: {{}}</p>
+                </div>
+            </modal>
+        </div>
+
+        <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+            </div>
+        </div>
+    </body>
+*@

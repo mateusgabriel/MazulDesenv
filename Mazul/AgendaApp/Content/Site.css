@@ -1,0 +1,57 @@
+﻿
+#rodape 
+{
+  width:100%;
+  position: relative;
+  bottom: 0;
+ }
+
+#menu 
+{
+ width:100%;
+ height:50px;
+ background-color: #808080;
+ color:#ffffff;
+ border:dotted;
+ border-width: 1px 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.center {
+  display: table;
+  margin: auto;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+color: red;
+}
+
+.field-validation-valid {
+display: none;
+}
+
+input[type="checkbox"].input-validation-error {
+border: 0 none;
+}
+
+.validation-summary-errors {
+color: #e80c4d;
+font-weight: bold;
+font-size: 1.1em;
+}
+
+.validation-summary-valid {
+display: none;
+}  

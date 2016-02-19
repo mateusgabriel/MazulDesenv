@@ -1,0 +1,108 @@
+﻿@model AgendaApp.Entidades.UsuarioPassivo
+<head>
+    @{
+        ViewBag.Title = "Visualizar";
+    }
+    <title>Visualizar</title>
+    <script type="text/javascript" src="~/Scripts/usuarioPassivo.js"></script>
+</head>
+
+<body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+    <br />
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-content ">
+                    <span class="card-title black-text">
+                        @Html.DisplayFor(model => model.Nome)
+                        @Html.DisplayFor(model => model.Sobrenome)
+                    </span>
+                    <br /><br />
+                    <p><i class="material-icons left">email</i>Email: @Html.DisplayFor(model => model.Email)</p>
+                    <br />
+                    <p><i class="material-icons left">home</i>Endereço: @Html.DisplayFor(model => model.Endereco)</p>
+                    <br />
+                    <p><i class="material-icons left">phone</i>Telefone: @Html.DisplayFor(model => model.Telefone)</p>
+                    <br />
+                    <p><i class="material-icons left">perm_identity</i>Sexo: @(Model.Sexo == 1 ? "Masculino" : "Feminino")</p>
+                    <br />
+                    <p><i class="material-icons left">event</i>Eventos: <a href="#!" onclick="Materialize.showStaggeredList('#staggered-test')">Visualizar</a></p>
+                </div>
+                <div class="card-action center">
+                    <a class="amber-text text-darken-4" href="@Url.Action("Editar", "UsuarioPassivo", new { id = Model.Id })">
+                        Editar
+                        <i class="material-icons left">mode_edit</i>
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioPassivo")">
+                <i class="material-icons left">reply</i>
+                Voltar
+            </a>
+        </div>
+
+        <div class="col s12 m5 l5 offset-l1 offset-m1">
+
+            <ul id="staggered-test">
+                <li class="" style="transform: translateX(0px); opacity: 0;">
+                    <h4>Eventos</h4>
+                </li>
+                @foreach (var item in Model.Eventos)
+                {
+                    <li class="" style="transform: translateX(0px); opacity: 0;">
+                        <div class="row">
+                            <div class="card hoverable col s12 m12 l10">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                        <i class="material-icons right">reorder</i>
+                                    </span>
+                                    <p>
+                                        @item.Nome
+                                        <span style="margin-right:-14px" class="right">
+                                            <input id="@item.Id" name="contatos" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                            <label for="@item.Id"></label>
+                                        </span>
+                                    </p>
+                                    <br />
+                                    @if (item.UsuariosPassivos.Any())
+                                    {
+                                        foreach (var contato in item.UsuariosPassivos)
+                                        {
+                                            <p>@contato.Nome @contato.Sobrenome</p>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p>Nenhum integrante</p>
+                                    }
+                                    <p>@item.Local</p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">@item.Nome<i class="material-icons right">close</i></span>
+                                    <p>@item.Descricao</p>
+                                    <p>@item.Periodicidade</p>
+                                    <p><span> <a class="grey-text text-darken-4 right" href="@Url.Action("Visualizar", "Evento", new { id = item.Id })"><i class="material-icons">content_paste</i></a></span> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+
+        </div>
+    </div>
+
+    @*<div class="row">
+        <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioPassivo")">
+            <i class="material-icons left">reply</i>
+            Voltar
+        </a>
+    </div>*@
+
+</body>

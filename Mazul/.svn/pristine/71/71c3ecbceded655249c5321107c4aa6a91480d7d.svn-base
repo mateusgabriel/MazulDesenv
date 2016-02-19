@@ -1,0 +1,95 @@
+﻿@model List<AgendaApp.Entidades.UsuarioPassivo>
+
+<head>
+    @{
+        ViewBag.Title = "Visualizar";
+        
+        @*Pega a lista dos ids dos eventos para serem deletados*@
+        string listaDeId = "";
+        foreach (var item in Model)
+        {
+            listaDeId += item.Id.ToString() + ",";
+        }
+    }
+    <title>Visualizar</title>
+    <script type="text/javascript" src="~/Scripts/usuarioPassivo.js"></script>
+</head>
+
+<body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+    <br />
+
+    @if (Model.Count > 1)
+    {
+        <h4>Deseja mesmo excluir estes contatos?</h4>
+        <div class="row">
+            <div class="col s12 m6 ">
+                <div class="card z-depth-3">
+                    <div class="card-content ">
+                        <span class="card-title black-text">
+                            Contatos
+                        </span>
+                        @foreach (var contato in Model)
+                        {
+                            <div style="padding:10px" class="card">
+                                <p>
+                                    <i class="material-icons left">bookmark</i>Nome:
+                                    @Html.DisplayFor(model => contato.Nome) @Html.DisplayFor(model => contato.Sobrenome)
+                                </p>
+                                <br />
+                                <p><i class="material-icons left">email</i>Email: @Html.DisplayFor(model => contato.Email)</p>
+                                <br />
+                                <p><i class="material-icons left">phone</i>Telefone: @Html.DisplayFor(model => contato.Telefone)</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-action center">
+                        <a class="amber-text text-darken-4" href="#" ng-click="deletarContatos('@listaDeId')">
+                            Excluir
+                            <i class="material-icons left">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4>Deseja mesmo excluir este contato?</h4>
+        foreach (var contato in Model)
+        {
+            <div class="row">
+                <div class="col s12 m6 ">
+                    <div class="card z-depth-3">
+                        <div class="card-content ">
+                            <span class="card-title black-text">
+                                @Html.DisplayFor(model => contato.Nome)
+                                @Html.DisplayFor(model => contato.Sobrenome)
+                            </span>
+                            <br /><br />
+                            <p><i class="material-icons left">email</i>Email: @Html.DisplayFor(model => contato.Email)</p>
+                            <br />
+                            <p><i class="material-icons left">home</i>Endereço: @Html.DisplayFor(model => contato.Endereco)</p>
+                            <br />
+                            <p><i class="material-icons left">phone</i>Telefone: @Html.DisplayFor(model => contato.Telefone)</p>
+                            <br />
+                            <p><i class="material-icons left">perm_identity</i>Sexo: @(contato.Sexo == 1 ? "Masculino" : "Feminino")</p>
+                        </div>
+                        <div class="card-action center">
+                            <a class="amber-text text-darken-4" href="#" ng-click="deletarContatos(@contato.Id)">
+                                Excluir
+                                <i class="material-icons left">delete</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="row">
+        <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioPassivo")">
+            <i class="material-icons left">reply</i>
+            Voltar
+        </a>
+    </div>
+
+</body>

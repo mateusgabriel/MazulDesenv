@@ -1,0 +1,70 @@
+﻿@model AgendaApp.Models.UsuarioPassivoViewModels
+
+@{
+    ViewBag.Title = "Novo Contato";
+}
+<script type="text/javascript" src="~/Scripts/usuarioPassivo.js"></script>
+
+<body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h3>Novo Contato</h3>
+
+        <form class="col s12">
+            <div class="row">
+                @Html.ValidationMessage("FieldsError")
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class=" material-icons prefix"> account_circle</i>
+                    <label for="Nome">Nome</label>
+                    @Html.TextBoxFor(model => model.Nome, new { required = "required" })
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <label for="Sobrenome">Sobrenome</label>
+                    @Html.TextBoxFor(model => model.Sobrenome, new { required = "required" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">home</i>
+                    <label for="Endereco">Endereço</label>
+                    @Html.TextBoxFor(model => model.Endereco, new { required = "required" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">email</i>
+                    <label for="Email">Email</label>
+                    @Html.TextBoxFor(model => model.Email, new { required = "required", type = "email" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">phone</i>
+                    <label for="Telefone">Telefone</label>
+                    @Html.TextBoxFor(model => model.Telefone, new { required = "required", placeholder = "(99)9999-9999" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">supervisor_account</i>
+                    @Html.RadioButtonFor(model => model.Sexo, 1, new { id = "Masculino" })
+                    <label for="Masculino">Masculino</label>
+                    @Html.RadioButtonFor(model => model.Sexo, 2, new { id = "Feminino" })
+                    <label for="Feminino">Feminino</label>
+                    @*@Html.ValidationMessageFor(model => model.Sexo)*@
+                </div>
+            </div>
+
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioPassivo")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn white-text waves-effect waves-light light-blue darken-3" type="submit" name="Inserir">
+                    Criar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    }
+</body>

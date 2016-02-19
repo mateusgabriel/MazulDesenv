@@ -1,0 +1,248 @@
+﻿@model AgendaApp.Models.EventoViewModels
+
+<head>
+    @{
+        ViewBag.Title = "Inserir";
+    }
+    <title>Inserir</title>
+    <script type="text/javascript" src="~/Scripts/evento.js"></script>
+</head>
+
+@{
+    //List<SelectListItem> itens = new List<SelectListItem>();
+    //itens.Add(new SelectListItem
+    //     {
+    //         Text = "Diária",
+    //         Value = "Diaria"
+    //     });
+    //itens.Add(new SelectListItem
+    //     {
+    //         Text = "Semanal",
+    //         Value = "Semanal"
+    //     });
+    //itens.Add(new SelectListItem
+    //     {
+    //         Text = "Mensal",
+    //         Value = "Mensal"
+    //     });
+    //itens.Add(new SelectListItem
+    //     {
+    //         Text = "Anual",
+    //         Value = "Anual"
+    //     });
+}
+
+<body ng-app="eventoApp" ng-controller="EventoController" ng-init="iniciarPickdate()">
+
+    <h3>Novo Evento</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+        <form class="col s12">
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">bookmark</i>
+                    @Html.TextBoxFor(model => model.Nome, new { required = "required" })
+                    <label for="Nome">Nome</label>
+                </div>
+                <div class="input-field col s6 m3 l3">
+                    <i class="material-icons prefix">access_time</i>
+                    @Html.TextBoxFor(model => model.Horario, new { @id = "clock", @Value = "12:00"})
+                    <label for="Horario">Horário</label>
+                </div>
+                <div class="input-field col s6 m3 l3">
+                    <i class="material-icons prefix">insert_invitation</i>
+                    @Html.TextBoxFor(model => model.DataEvento, new { @Value = "Data do evento", @class = "datepicker" })
+                    <label for="DataEvento">Data</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <i class="material-icons prefix">place</i>
+                    @Html.TextBoxFor(model => model.Local, new { required = "required" })
+                    <label for="Local">Local</label>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    @Html.DropDownListFor(model => model.Periodicidade, new SelectList(Model.Itens), "Selecione")
+                    <label>Periodicidade</label>
+                    @*@Html.ValidationMessageFor(model => model.Periodicidade)*@
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="material-icons prefix">description</i>
+                    @Html.TextAreaFor(model => model.Descricao, new { @class = "materialize-textarea validate"})
+                    <label for="Descricao">Descrição</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <ul class="collapsible col s12 m6 l6" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">people</i>Integrantes do Evento
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field center col">
+                                @foreach (var item in Model.UsuariosPassivos)
+                                {
+                                    <p class="left" style="margin-top:-35px">
+                                        <input id="@item.Id" name="contatos" type="checkbox" value="@item.Id" />
+                                        <label for="@item.Id">@item.Nome @item.Sobrenome</label>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "Evento")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="Inserir">
+                    Criar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    }
+</body>
+
+
+
+
+
+
+@*<div class="row">
+        <ul class="collapsible col s12 m6 l6" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">people</i>Integrantes
+                </div>
+                <div class="collapsible-body">
+                    <p>
+                        Selecione os contatos deste evento:
+                        <div class="input-field center col" ng-repeat="item in usuariosPassivos">
+                            <input type="checkbox" id="{{item.Id}}" value="{{item.Id}}" ng-checked="selection.indexOf(item.Id) > -1" ng-click="toggleSelection(item.Id)" />
+                            <label for="{{item.Id}}">{{item.Nome}} {{item.Sobrenome}}</label>
+                        </div>
+                    </p>
+                    <br />
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    @*<div id="modalUsuarioPassivo" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Adicionar Contato</h4>
+                <p>Selecione quais contatos você gostaria que participassem deste evento.</p>
+
+                <div class="input-field center col" ng-repeat="item in usuariosPassivos">
+                    <p>
+                        <input type="checkbox" id="{{item.Id}}" value="{{item.Id}}" ng-checked="selection.indexOf(item.Id) > -1" ng-click="toggleSelection(item.Nome)" />
+                        <label for="{{item.Id}}">{{item.Nome}} {{item.Sobrenome}}</label>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat left">Cancelar</a>
+                <a ng-click='salvarUsuariosPassivos()' class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
+            </div>
+        </div>*@
+
+
+@*<body ng-app="eventoApp" ng-controller="EventoController">
+        <script type="text/javascript" src="~/Scripts/evento.js"></script>
+        <h3>Novo Evento</h3>
+
+        <form class="col s12">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">bookmark</i>
+                    <input id="event_name" ng-model="evento.Nome" type="text" class="validate">
+                    <label for="event_name">Nome</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">description</i>
+                    <textarea id="event_description" ng-model="evento.Descricao" type="text" class="materialize-textarea validate" length="350" maxlength="350"></textarea>
+                    <label for="event_description">Descrição</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">insert_invitation</i>
+                    <input id="date" ng-model="evento.DataEvento" type="date">
+                    <label for="date">Data</label>
+                </div>
+                <div class="input-field col s6">
+                    <select class="browser-default" ng-model="evento.Periodicidade">
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="diaria">Diária</option>
+                        <option value="mensal">Mensal</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                    <label>Periodicidade</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">place</i>
+                    <input id="place" ng-model="evento.Local" type="text" class="validate">
+                    <label for="place">Local</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field center col s12">
+                    <a class="btn waves-effect waves-light blue modal-trigger" href="#modalUsuarioPassivo" ng-click=" listarUsuariosPassivos()" name="Inserir">
+                        Adicionar Contato
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "Evento")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn waves-effect waves-light light-blue darken-3" type="button" ng-click="cadastrar(evento)" name="Inserir">
+                    Criar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+            <div id="modalUsuarioPassivo" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Adicionar Contato</h4>
+                    <p>Selecione quais contatos você gostaria que participassem deste evento.</p>
+
+                    <div class="input-field center col" ng-repeat="item in usuariosPassivos">
+                        <p>
+                            <input ng-model="evento.UsuarioPassivo" type="checkbox" id="{{item.Id}}" />
+                            <label for="{{item.Id}}">{{item.Nome}} {{item.Sobrenome}}</label>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat left">Cancelar</a>
+                    <a ng-click='salvarUsuariosPassivos()' class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</a>
+                </div>
+            </div>
+
+        </form>
+    </body>*@

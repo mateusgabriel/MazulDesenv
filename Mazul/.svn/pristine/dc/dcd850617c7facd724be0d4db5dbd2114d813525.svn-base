@@ -1,0 +1,63 @@
+﻿@model AgendaApp.Entidades.UsuarioAtivo
+<head>
+    @{
+        ViewBag.Title = "Login";
+    }
+
+    <title>Login</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
+    @using (Html.BeginForm())
+    {
+        @*<h3>Acesse sua conta!</h3>*@
+        <br />
+        <br />
+
+        <div class="left col s12 m7">
+            <div class=" col s12 m6 offset-l3">
+                <img class="col m12" src="~/img/image_login_small.jpg" />
+
+                @*<p style="font-family:Arial">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed enim quis nunc tristique scelerisque. Suspendisse nibh velit, lacinia ac urna id, bibendum commodo tortor. Aenean tincidunt sem in mi ultricies aliquam.
+                    </p>*@
+            </div>
+        </div>
+
+        <div class="card col s12 m5 z-depth-3 left">
+            <form>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="input-field col s11">
+                            <i class="material-icons prefix">perm_identity</i>
+                            <label for="Email">Email</label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s11">
+                            <i class="material-icons prefix">lock_outline</i>
+                            <label for="Senha">Senha</label>
+                            @Html.PasswordFor(model => model.Senha, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Senha)
+                        </div>
+                    </div>
+                    @Html.ValidationSummary(true)
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <button class="btn white-text col s5 m5 l5 truncate waves-effect waves-light light-blue darken-3" type="submit" name="Entrar">
+                            Entrar
+                        </button>
+
+                        <a class="btn white-text col s5 m5 l5  truncate waves-light light-blue darken-3 right" href="@Url.Action("Inserir", "UsuarioAtivo")" name="Registrar">
+                            Registre-se
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    </body>

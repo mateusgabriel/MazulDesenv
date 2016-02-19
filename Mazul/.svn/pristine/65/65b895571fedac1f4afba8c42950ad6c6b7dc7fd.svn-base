@@ -1,0 +1,134 @@
+﻿@model AgendaApp.Models.EventoViewModels
+
+<head>
+    @{
+        ViewBag.Title = "Editar";
+    }
+    <title>Editar</title>
+    <script type="text/javascript" src="~/Scripts/evento.js"></script>
+</head>
+
+@{
+    ViewBag.Title = "Inserir";
+
+    List<SelectListItem> itens = new List<SelectListItem>();
+    itens.Add(new SelectListItem
+         {
+             Text = "Diária",
+             Value = "Diaria"
+         });
+    itens.Add(new SelectListItem
+         {
+             Text = "Semanal",
+             Value = "Semanal"
+         });
+    itens.Add(new SelectListItem
+         {
+             Text = "Mensal",
+             Value = "Mensal"
+         });
+    itens.Add(new SelectListItem
+         {
+             Text = "Anual",
+             Value = "Anual"
+         });
+}
+
+<body ng-app="eventoApp" ng-controller="EventoController" ng-init="formatarPickdate('@Model.DataEvento')">
+
+    <h3>Editar Evento</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <form class="col s12">
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">bookmark</i>
+                    @Html.TextBoxFor(model => model.Nome, new { required = "required" })
+                    <label for="Nome">Nome</label>
+                </div>
+                <div class="input-field col s6 m3 l3">
+                    <i class="material-icons prefix">access_time</i>
+                    @Html.TextBoxFor(model => model.Horario, new { @id = "clock"})
+                    <label for="Horario">Horário</label>
+                </div>
+                <div class="input-field col s6 m3 l3">
+                    <i class="material-icons prefix">insert_invitation</i>
+                    @Html.TextBoxFor(model => model.DataEvento, new { @class = "datepicker" })
+                    <label for="DataEvento">Data</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <i class="material-icons prefix">place</i>
+                    @Html.TextBoxFor(model => model.Local, new { required = "required" })
+                    <label for="Local">Local</label>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    @Html.DropDownListFor(model => model.Periodicidade, itens, "Selecione")
+                    <label>Periodicidade</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="material-icons prefix">description</i>
+                    @Html.TextAreaFor(model => model.Descricao, new { @class = "materialize-textarea validate" })
+                    <label for="Descricao">Descrição</label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <ul class="collapsible col s12 m6 l6" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">people</i>Integrantes do Evento
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="input-field center col">
+
+                                @foreach (var item in Model.UsuariosPassivos)
+                                {
+                                    bool contatoMarcado = Model.ContatosId.Contains(item.Id);
+                                    if (contatoMarcado)
+                                    {
+                                        <p class="left" style="margin-top:-35px">
+                                            <input id="@item.Id" name="contatos" type="checkbox" checked="checked" value="@item.Id" />
+                                            <label for="@item.Id">@item.Nome @item.Sobrenome</label>
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="left" style="margin-top:-35px">
+                                            <input id="@item.Id" name="contatos" type="checkbox" value="@item.Id" />
+                                            <label for="@item.Id">@item.Nome @item.Sobrenome</label>
+                                        </p>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "Evento")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="Editar">
+                    Editar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    }
+</body>

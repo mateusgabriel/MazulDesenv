@@ -1,0 +1,49 @@
+﻿@model AgendaApp.Entidades.UsuarioAtivo
+
+<head>
+    @{
+        ViewBag.Title = "Visualizar";
+    }
+    <title>Visualizar</title>
+</head>
+
+<body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
+
+    <div class="row">
+        <h4>
+            Usuario Ativo
+        </h4>
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">
+                        @Html.DisplayFor(model => model.Nome)
+                        @Html.DisplayFor(model => model.Sobrenome)
+                    </span>
+                    <br /><br />
+                    <p><i class="material-icons left">email</i>Email: @Html.DisplayFor(model => model.Email)</p>
+                    <br />
+                    <p><i class="material-icons left">home</i>Endereço: @Html.DisplayFor(model => model.Endereco)</p>
+                    <br />
+                    <p><i class="material-icons left">phone</i>Tel: @Html.DisplayFor(model => model.Telefone)</p>
+                    <br />
+                    <p><i class="material-icons left">perm_identity</i>Sexo: @(Model.Sexo == 1 ? "Masculino" : "Feminino")</p>
+                </div>
+                <div class="card-action">
+                    <a href="@Url.Action("Editar", "UsuarioAtivo", new { id = Model.Id })">
+                        Editar
+                        <i class="material-icons left">mode_edit</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioAtivo")">
+            <i class="material-icons left">reply</i>
+            Voltar
+        </a>
+    </div>
+
+</body>

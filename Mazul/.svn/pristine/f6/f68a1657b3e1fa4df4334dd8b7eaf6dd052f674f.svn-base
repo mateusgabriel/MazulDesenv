@@ -1,0 +1,113 @@
+﻿@model List<AgendaApp.Entidades.Evento>
+
+<head>
+    @{
+        ViewBag.Title = "Visualizar";
+        
+        @*Pega a lista dos ids dos eventos para serem deletados*@
+        string listaDeId = "";
+        foreach (var item in Model)
+        {
+            listaDeId += item.Id.ToString() + ",";
+        }
+    }
+    <title>Visualizar</title>
+    <script type="text/javascript" src="~/Scripts/evento.js"></script>
+</head>
+
+<body ng-app="eventoApp" ng-controller="EventoController">
+    <br />
+
+    @if (Model.Count > 1)
+    {
+        <h4>Deseja excluir estes eventos?</h4>
+        <div class="row">
+            <div class="col s12 m6 ">
+                <div class="card">
+                    <div class="card-content ">
+                        <span class="card-title black-text">
+                            Eventos
+                        </span>
+                        @foreach (var evento in Model)
+                        {
+                            <div style="padding:10px" class="card">
+                                <p>
+                                    <i class="material-icons left">bookmark</i>Nome:
+                                    @Html.DisplayFor(model => evento.Nome)
+                                </p>
+                                <br />
+                                <p>
+                                    <i class="material-icons left">today</i>Data:
+                                    @evento.DataEvento.ToShortDateString() às @evento.Horario.ToString(@"hh\:mm")
+                                </p>
+                                <br />
+                                <p>
+                                    <i class="material-icons left">people</i>Contatos:
+                                    @foreach (var contato in evento.UsuariosPassivos)
+                                    {
+                                        <span>@contato.Nome @contato.Sobrenome </span>
+                                    }
+                                </p>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-action center">
+                        <a class="amber-text text-darken-4" href="#" ng-click="deletarEventos('@listaDeId')">
+                            Excluir
+                            <i class="material-icons left">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4>Deseja excluir este evento?</h4>
+        foreach (var evento in Model)
+        {
+            <div class="row">
+                <div class="col s12 m6 ">
+                    <div class="card">
+                        <div class="card-content ">
+                            <span class="card-title black-text">
+                                @Html.DisplayFor(model => evento.Nome)
+                            </span>
+                            <br /><br />
+                            <p><i class="material-icons left">access_time</i>Horário: @evento.Horario.ToString(@"hh\:mm")</p>
+                            <br />
+                            <p><i class="material-icons left">today</i>Data: @evento.DataEvento.ToShortDateString()</p>
+                            <br />
+                            <p><i class="material-icons left">home</i>Lugar: @Html.DisplayFor(model => evento.Local)</p>
+                            <br />
+                            <p><i class="material-icons left">history</i>Periodicidade: @Html.DisplayFor(model => evento.Periodicidade)</p>
+                            <br />
+                            <p>
+                                <i class="material-icons left">people</i>Contatos:
+                                @foreach (var contato in evento.UsuariosPassivos)
+                                {
+                                    <span>@contato.Nome @contato.Sobrenome </span>
+                                }
+                            </p>
+                            <br />
+                            <p><i class="material-icons left">description</i>Descrição: @Html.DisplayFor(model => evento.Descricao)</p>
+                        </div>
+                        <div class="card-action center">
+                            <a class="amber-text text-darken-4" href="#" ng-click="deletarEventos(@evento.Id)">
+                                Excluir
+                                <i class="material-icons left">delete</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="row">
+        <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "Evento")">
+            <i class="material-icons left">reply</i>
+            Voltar
+        </a>
+    </div>
+
+</body>

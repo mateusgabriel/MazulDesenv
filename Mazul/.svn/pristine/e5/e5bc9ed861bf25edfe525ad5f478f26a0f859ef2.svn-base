@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<head>
+    @*<meta charset="utf-8" />
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="~/Content/clockpicker.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="~/Content/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="~/Content/standalone.css" media="screen,projection" />
+
+    <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="~/Scripts/materialize.js"></script>
+    <script type="text/javascript" src="~/Scripts/clockpicker.js"></script>
+
+    <title>Mazul</title>
+</head>
+<body>
+    <header>
+        <div id="menu">
+            @Html.Partial("_Menu")
+        </div>
+    </header>
+
+    <main>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.datepicker').pickadate({
+                    format: 'dd mmm, yyyy',
+                    labelMonthNext: 'Próximo mês',
+                    labelMonthPrev: 'Mês anterior',
+                    labelMonthSelect: 'Selecione um mês',
+                    labelYearSelect: 'Selecione um ano',
+                    monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Aug', 'Set', 'Out', 'Nov', 'Dez'],
+                    weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                    today: 'Hoje',
+                    clear: 'Limpar',
+                    close: 'Fechar'
+                });
+                $('select').material_select();
+                $(".button-collapse").sideNav();
+                $('.modal-trigger').leanModal();
+                $('.collapsible').collapsible({
+                    accordion: false
+                });
+                Materialize.showStaggeredList("#eventosDiariosList");
+                var input = $('#clock');
+                input.clockpicker({
+                    autoclose: true
+                });
+            })
+        </script>
+
+        <br />
+
+
+        <div class="container">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer class="page-footer blue darken-3">
+        <div class="container white-text">
+            &copy; Copyright 2015 Mazul
+            <p></p>
+            @*<a class="grey-text text-lighten-4 right" href="#!">Outros Links</a>*@
+        </div>
+    </footer>
+
+</body>

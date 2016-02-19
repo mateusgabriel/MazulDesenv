@@ -1,0 +1,136 @@
+﻿@model AgendaApp.Models.UsuarioAtivoViewModels
+
+<head>
+    @{
+        ViewBag.Title = "Inserir";
+    }
+    <title>Inserir</title>
+</head>
+
+<body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
+        <h3>Inserir</h3>
+
+        <form name="form" class="css-form" method="post" action="@Url.Action("Inserir", "UsuarioAtivo")">
+            <div class="row">
+                @Html.ValidationMessage("FieldsError")
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class=" material-icons prefix"> account_circle</i>
+                    @*<input id="first_name" name="first_name" ng-model="usuarioAtivo.Nome" type="text" required />*@
+                    <label for="Nome">Nome</label>
+                    @Html.TextBoxFor(model => model.Nome, new { required = "required" })
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    @*<input id="last_name" name="last_name" ng-model="usuarioAtivo.Sobrenome" type="text" required/>*@
+                    <label for="Sobrenome">Sobrenome</label>
+                    @Html.TextBoxFor(model => model.Sobrenome, new { required = "required" })
+                    @*<div ng-show="form.$submitted || form.last_name.$touched">
+                            <div style="color:red;" ng-show="form.last_name.$error.required">Campo Sobrenome é obrigatório.</div>
+                        </div>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">home</i>
+                    @*<input id="address" name="address" ng-model="usuarioAtivo.Endereco" type="text" required />*@
+                    <label for="Endereco">Endereço</label>
+                    @Html.TextBoxFor(model => model.Endereco, new { required = "required" })
+                    @*<div ng-show="form.$submitted || form.address.$touched">
+                            <div style="color:red;" ng-show="form.address.$error.required">Campo Sobrenome é obrigatório.</div>
+                        </div>*@
+                </div>
+
+                <div class="input-field col s12 m6 l6">
+                    @*<i class="material-icons prefix">supervisor_account</i>
+                        <input ng-model="usuarioAtivo.Sexo" name="group1" type="radio" id="Masculino" value="1" required />
+                        <label for="Masculino">Masculino</label>
+                        <input ng-model="usuarioAtivo.Sexo" name="group1" type="radio" id="Feminino" value="2" required />
+                        <label for="Feminino">Feminino</label>*@
+                    <i class="material-icons prefix">supervisor_account</i>
+                    @Html.RadioButtonFor(model => model.Sexo, 1, new { id = "Masculino" })
+                    <label for="Masculino">Masculino</label>
+                    @Html.RadioButtonFor(model => model.Sexo, 2, new { id = "Feminino" })
+                    <label for="Feminino">Feminino</label>
+                    @*@Html.ValidationMessageFor(model => model.Sexo)*@
+                    @*<div ng-show="form.$submitted || form.group1.$touched">
+                            <div style="color:red;" ng-show="form.group1.$error.required">Campo Sexo é obrigatório.</div>
+                        </div>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    @*<input id="email" name="email" ng-model="usuarioAtivo.Email" type="email" required />*@
+                    <label for="Email">Email</label>
+                    @Html.TextBoxFor(model => model.Email, new { required = "required", type = "email" })
+                    @*<div ng-show="form.$submitted || form.email.$touched">
+                            <span style="color:red;" ng-show="form.email.$error.required">Campo Email é obrigatório.</span>
+                            <span style="color:red;" ng-show="form.email.$error.email">Formato de email inválido.</span>
+                        </div>*@
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    @*<input id="telephone" name="telephone" ng-model="usuarioAtivo.Telefone" type="text" ng-minlength="13" ng-maxlength="14" placeholder="(85)9999-9999" required />*@
+                    <label for="Telefone">Telefone</label>
+                    @Html.TextBoxFor(model => model.Telefone, new { required = "required", placeholder = "(99)9999-9999"})
+                    @*<div ng-show="form.$submitted || form.telephone.$touched">
+                            <span style="color:red;" ng-show="form.telephone.$error.required">Campo Telefone é obrigatório.</span>
+                            <span class="help-block" style="color:red;" ng-show="((form.telephone.$error.minlength || form.telephone.$error.maxlength) && form.telephone.$dirty) ">O campo Telefone deve conter no mínimo 13 caracteres.</span>
+                        </div>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">lock_outline</i>
+                    @*<input id="password" name="password" ng-model="usuarioAtivo.senha" type="password" ng-minlength="7" required />*@
+                    <label for="Senha">Senha</label>
+                    @Html.PasswordFor(model => model.Senha, new { required = "required" })
+                    @*<div ng-show="form.$submitted || form.password.$touched">
+                            <span style="color:red;" ng-show="form.password.$error.required">Campo Senha é obrigatório.</span>
+                            <span class="help-block" style="color:red;" ng-show="((form.password.$error.minlength || form.password.$error.maxlength) && form.password.$dirty) ">A senha deve conter ao menos 7 caracteres sendo no mínimo um numérico, um símbolo especial e uma letra maiúscula.</span>
+                        </div>*@
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">lock_outline</i>
+                    @*<input id="confirm_password" name="confirm_password" ng-model="confirm_password" type="password" pw-check="usuarioAtivo.senha" required />*@
+                    <label for="ConfirmaSenha">Confirmar Senha</label>
+                    @Html.PasswordFor(model => model.ConfirmaSenha, new { required = "required" })
+                    @Html.ValidationMessageFor(model => model.ConfirmaSenha)
+                    @*<div ng-show="form.$submitted || form.confirm_password.$touched">
+                            <span style="color:red;" ng-show="form.confirm_password.$error.required">Campo Confirmar Senha é obrigatório.</span>
+                            @*<span class="help-block" style="color:red;" ng-show="form.confirm_password.$error.pwmatch">As senhas não são iguais.</span>
+                        </div>
+                        <div class="msg-block" ng-show="form.$error">
+                            <span class="msg-error" ng-show="form.confirm_password.$error.pwmatch">Passwords don't match.</span>
+                        </div>*@
+                </div>
+            </div>
+            <div style="padding-left:15px" class="row">
+                @Html.ValidationMessage("PasswordError")
+            </div>
+
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "usuarioAtivo")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn white-text waves-effect waves-light light-blue darken-3" type="submit" name="Inserir">
+                    Criar
+                    <i class="material-icons right">send</i>
+                </button>
+                @*<a class="btn white-text waves-effect waves-light light-blue darken-3" href="@Url.Action("Inserir", "UsuarioAtivo")" name="Registrar">
+                        Criar
+                        <i class="material-icons right">send</i>
+                    </a>*@
+            </div>
+        </form>
+    }
+</body>

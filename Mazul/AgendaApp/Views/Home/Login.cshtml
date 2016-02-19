@@ -1,0 +1,66 @@
+﻿@model AgendaApp.Models.HomeViewModels
+<head>
+    @*<meta http-equiv="Refresh" content="5" />*@
+    @{
+        ViewBag.Title = "Login";
+    }
+    <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
+    <title>Login</title>
+</head>
+
+<body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        @*<h3>Acesse sua conta!</h3>*@
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col s12 m6 l6  offset-l1">
+                <img style="width:325px" src="~/img/image_login_small.jpg" />
+
+                @*<p style="font-family:Arial">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed enim quis nunc tristique scelerisque. Suspendisse nibh velit, lacinia ac urna id, bibendum commodo tortor. Aenean tincidunt sem in mi ultricies aliquam.
+            </p>*@
+            </div>
+
+
+            <div class="card col s12 m6 l5 z-depth-3">
+                <form>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="input-field col s11">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <label for="Email">Email</label>
+                                @Html.TextBoxFor(model => model.Email, new { required = "required", type = "email" })
+                                @*@Html.ValidationMessageFor(model => model.Email)*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s11">
+                                <i class="material-icons prefix">lock_outline</i>
+                                <label for="Senha">Senha</label>
+                                @Html.PasswordFor(model => model.Senha, new { required = "required" })
+                                @*@Html.ValidationMessageFor(model => model.Senha)*@
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true)
+                    </div>
+                    <div class="card-action">
+                        <div class="row ">
+                            <button class="btn white-text col s5 m5 waves-effect waves-light light-blue darken-3" type="submit" name="Entrar">
+                                Entrar
+                            </button>
+
+                            <a class="btn white-text truncate col s5 m5 waves-light light-blue darken-3 right" href="@Url.Action("Inserir", "UsuarioAtivo")" name="Registrar">
+                                Registre-se
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</body>

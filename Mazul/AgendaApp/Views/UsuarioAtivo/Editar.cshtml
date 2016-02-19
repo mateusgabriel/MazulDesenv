@@ -1,0 +1,78 @@
+﻿@model AgendaApp.Entidades.UsuarioAtivo
+
+<head>
+@{
+    ViewBag.Title = "Editar";
+}
+    <title>Editar</title>
+</head>
+
+<body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <form class="col s12">
+            <div class="row">
+                <h3>Editar</h3>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    @Html.EditorFor(model => model.Nome, new { required = "required" })
+                    <label for="Nome">Nome</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    @Html.EditorFor(model => model.Sobrenome, new { required = "required" })
+                    <label for="Sobrenome">Sobrenome</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">home</i>
+                    @Html.EditorFor(model => model.Endereco, new { required = "required" })
+                    <label for="Endereco" data-error="wrong" data-success="right">Endereço</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    @Html.EditorFor(model => model.Email, new { required = "required", type = "email" })
+                    <label for="Email">Email</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">contact_phone</i>
+                    @Html.EditorFor(model => model.Telefone, new { required = "required" })
+                    <label for="Telefone">Telefone</label>
+                </div>
+
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">supervisor_account</i>
+                    @Html.RadioButtonFor(model => model.Sexo, 1, new { id = "Masculino", required = "required" })
+                    <label for="Masculino">Masculino</label>
+                    @Html.RadioButtonFor(model => model.Sexo, 2, new { id = "Feminino", required = "required" })
+                    <label for="Feminino">Feminino</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <a class="btn waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioAtivo")">
+                    <i class="material-icons left">reply</i>
+                    Voltar
+                </a>
+                <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="Editar">
+                    Salvar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    }
+
+</body>
