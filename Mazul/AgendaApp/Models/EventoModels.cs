@@ -26,8 +26,7 @@ namespace AgendaApp.Models
 
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DataEvento == date).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId && a.DataEvento == date).ToList();
 
             return eventos;
         }
