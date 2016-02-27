@@ -22,7 +22,6 @@ namespace AgendaApp.Models
 
         public IList<Evento> consultarEventosDiarios()
         {
-            //teste
             var date = DateTime.Now.Date;
 
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);

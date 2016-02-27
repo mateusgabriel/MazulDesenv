@@ -178,10 +178,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioAtivoController.cs" />
     <Compile Include="Controllers\UsuarioPassivoController.cs" />
-    <Compile Include="DAO\EventoDAO.cs" />
-    <Compile Include="DAO\HomeDAO.cs" />
-    <Compile Include="DAO\UsuarioAtivoDAO.cs" />
-    <Compile Include="DAO\UsuarioPassivoDAO.cs" />
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="Entidades\UsuarioAtivo.cs" />
     <Compile Include="Entidades\UsuarioPassivo.cs" />
