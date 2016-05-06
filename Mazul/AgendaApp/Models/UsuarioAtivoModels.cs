@@ -15,7 +15,7 @@ namespace AgendaApp.Models
     public class UsuarioAtivoModels
     {
 
-        private AgendaAppContext db = new AgendaAppContext();
+        private MazulContext db = new MazulContext();
 
         public IList<UsuarioAtivo> consultarUsuariosAtivos()
         {

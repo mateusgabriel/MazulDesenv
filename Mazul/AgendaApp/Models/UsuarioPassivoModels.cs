@@ -9,7 +9,7 @@ namespace AgendaApp.Models
 {
     public class UsuarioPassivoModels
     {
-        private AgendaAppContext db = new AgendaAppContext();
+        private MazulContext db = new MazulContext();
 
         public IList<UsuarioPassivo> consultaUsuariosPassivos()
         {

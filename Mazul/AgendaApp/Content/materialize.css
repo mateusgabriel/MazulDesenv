@@ -7126,6 +7126,13 @@ nav ul a span.badge {
     left: auto;
     right: auto;
   }
+    .row .col.lhalf {
+    width: 13.96%;
+    margin-left: auto;
+    margin: 1px;
+    left: auto;
+    right: auto;
+  }
   .row .col.l2 {
     width: 16.6666666667%;
     margin-left: auto;

@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -169,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SessionExpireAttribute.cs" />
-    <Compile Include="Context\AgendaAppContext.cs" />
+    <Compile Include="Context\MazulContext.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -196,9 +197,9 @@
     <Compile Include="Migrations\201508141505388_UsuarioPassivo.Designer.cs">
       <DependentUpon>201508141505388_UsuarioPassivo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509031432393_Evento.cs" />
-    <Compile Include="Migrations\201509031432393_Evento.Designer.cs">
-      <DependentUpon>201509031432393_Evento.cs</DependentUpon>
+    <Compile Include="Migrations\201605062200379_Evento.cs" />
+    <Compile Include="Migrations\201605062200379_Evento.Designer.cs">
+      <DependentUpon>201605062200379_Evento.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EventoModels.cs" />
@@ -317,8 +318,8 @@
     <EmbeddedResource Include="Migrations\201508141505388_UsuarioPassivo.resx">
       <DependentUpon>201508141505388_UsuarioPassivo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509031432393_Evento.resx">
-      <DependentUpon>201509031432393_Evento.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605062200379_Evento.resx">
+      <DependentUpon>201605062200379_Evento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

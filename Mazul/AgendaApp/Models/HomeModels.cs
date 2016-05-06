@@ -9,28 +9,29 @@ namespace AgendaApp.Models
 {
     public class HomeModels
     {
-        private AgendaAppContext db = new AgendaAppContext();
+        private MazulContext db = new MazulContext();
 
         public UsuarioAtivo VerificarUsuario(string email, string senha)
         {
-            //try
-            //{
-                UsuarioAtivo us = db.UsuariosAtivos.SingleOrDefault(a => a.Email == email);
+            var usuarioAtivo = new UsuarioAtivo();
 
-                if (us != null)
+            try
+            {
+                usuarioAtivo = db.UsuariosAtivos.Where(a => a.Email == email).FirstOrDefault();
+
+                if (usuarioAtivo != null)
                 {
-                    if (us.Senha == Hash.CriarSenhaHash(senha, us.Salt))
+                    if (usuarioAtivo.Senha == Hash.CriarSenhaHash(senha, usuarioAtivo.Salt))
                     {
-                        return us;
+                        return usuarioAtivo;
                     }
-                    else return null;
                 }
-                else return null;
-            //}
-            //catch(Exception ex)
-            //{
-            //    //
-            //}
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return usuarioAtivo;
         }
     }
 }

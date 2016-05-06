@@ -20,7 +20,9 @@ namespace AgendaApp.Entidades
         public TimeSpan Horario { get; set; }
 
         public DayOfWeek DiaDaSemana { get; set; }
-        
+
+        public int SemanaDoMes { get; set; }
+
         public string Local { get; set; }
 
         public virtual UsuarioAtivo UsuarioAtivo { get; set; }

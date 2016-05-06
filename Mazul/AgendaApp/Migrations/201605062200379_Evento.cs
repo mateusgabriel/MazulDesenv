@@ -7,12 +7,12 @@ namespace AgendaApp.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Eventoes", "DiaDaSemana", c => c.Int(nullable: false));
+            AddColumn("dbo.Eventoes", "SemanaDoMes", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Eventoes", "DiaDaSemana");
+            DropColumn("dbo.Eventoes", "SemanaDoMes");
         }
     }
 }

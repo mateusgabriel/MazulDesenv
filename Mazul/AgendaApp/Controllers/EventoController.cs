@@ -70,6 +70,7 @@ namespace AgendaApp.Controllers
                 evento.Descricao = eventoViewModel.Descricao;
                 evento.Local = eventoViewModel.Local;
                 evento.Periodicidade = eventoViewModel.Periodicidade;
+                evento.SemanaDoMes = models.consultaSemanaDoMes(DateTime.Today);
                 evento.UsuarioAtivo = models.retornarUsuarioLogado();
 
                 if (contatos != null)
@@ -300,7 +301,7 @@ namespace AgendaApp.Controllers
                 List<int> eventoIds = new List<int>();
                 foreach (var item in ids.Split(','))
                 {
-                    if (item != "")
+                    if (!string.IsNullOrEmpty(item))
                     {
                         eventoIds.Add(Convert.ToInt32(item));
                     }
@@ -366,7 +367,6 @@ namespace AgendaApp.Controllers
             eventosViewModel.EventosSegundoDomingo = eventosSegundoDomingo;
             eventosViewModel.EventosTerceiroDomingo = eventosTerceiroDomingo;
             eventosViewModel.EventosQuartoDomingo = eventosQuartoDomingo;
-            eventosViewModel.SemanaDoMes = GetWeekOfMonth(DateTime.Today);
 
             return eventosViewModel;
         }

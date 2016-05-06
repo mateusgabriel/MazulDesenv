@@ -7,9 +7,9 @@ using System.Data.Entity;
 
 namespace AgendaApp
 {
-    public class AgendaAppContext : DbContext
+    public class MazulContext : DbContext
     {
-        public AgendaAppContext() : base("name=AgendaAppContext") { }
+        public MazulContext() : base("name=AgendaAppContext") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

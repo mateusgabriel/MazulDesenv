@@ -10,7 +10,7 @@ namespace AgendaApp.Models
     public class EventoModels
     {
 
-        private AgendaAppContext db = new AgendaAppContext();
+        private MazulContext db = new MazulContext();
 
         public IList<Evento> consultarEventos()
         {
@@ -22,9 +22,7 @@ namespace AgendaApp.Models
 
         public IList<Evento> consultarEventosDiarios()
         {
-            //teste
             var date = DateTime.Now.Date;
-
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             List<Evento> eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId && a.DataEvento == date).ToList();
@@ -32,75 +30,56 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarDomingos()
-        {
-            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-
-            List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Sunday).ToList();
-
-            return eventos;
-        }
-
-        //Consulta todos as datas de domingo do mês de Setembro e usa apenas a data do primeiro domingo
+        //Consulta todos as datas de domingo do mês e usa apenas a data do primeiro domingo
         public IList<Evento> consultarPrimeiroDomingo()
         {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
             DateTime primeiroDomingo = dias[0];
-            //DateTime teste = GetDates()
-            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
 
             List<Evento> eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId)
                 .Where(a => a.DiaDaSemana == DayOfWeek.Sunday)
                 .Where(a => a.DataEvento == primeiroDomingo).ToList();
-                //.Where(a => a.DataEvento in DateTime.Now.Day)
 
             return eventos;
         }
         public IList<Evento> consultarSegundoDomingo()
         {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
             DateTime primeiroDomingo = dias[1];
-            //DateTime teste = GetDates()
-            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
 
             List<Evento> eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId)
                 .Where(a => a.DiaDaSemana == DayOfWeek.Sunday)
                 .Where(a => a.DataEvento == primeiroDomingo).ToList();
-            //.Where(a => a.DataEvento in DateTime.Now.Day)
 
             return eventos;
         }
         public IList<Evento> consultarTerceiroDomingo()
         {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
             DateTime primeiroDomingo = dias[2];
-            //DateTime teste = GetDates()
-            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
 
             List<Evento> eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId)
                 .Where(a => a.DiaDaSemana == DayOfWeek.Sunday)
                 .Where(a => a.DataEvento == primeiroDomingo).ToList();
-            //.Where(a => a.DataEvento in DateTime.Now.Day)
 
             return eventos;
         }
         public IList<Evento> consultarQuartoDomingo()
         {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
             DateTime primeiroDomingo = dias[3];
-            //DateTime teste = GetDates()
-            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
 
             List<Evento> eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId)
                 .Where(a => a.DiaDaSemana == DayOfWeek.Sunday)
                 .Where(a => a.DataEvento == primeiroDomingo).ToList();
-            //.Where(a => a.DataEvento in DateTime.Now.Day)
 
             return eventos;
         }
@@ -109,15 +88,16 @@ namespace AgendaApp.Models
         public List<DateTime> consultarDiaNasSemanasDoMes(int mes, int ano, DayOfWeek dia)
         {
             List<DateTime> diaNasSemanasDoMes = new List<DateTime>();
-
             DateTime primeiroDiadoMes = new DateTime(ano, mes, 1);
-
             DateTime diaAtual = primeiroDiadoMes;
+
             while (primeiroDiadoMes.Month == diaAtual.Month)
             {
                 DayOfWeek diaNaSemana = diaAtual.DayOfWeek;
                 if (diaNaSemana == dia)
+                {
                     diaNasSemanasDoMes.Add(diaAtual);
+                }
 
                 diaAtual = diaAtual.AddDays(1);
             }
@@ -128,10 +108,12 @@ namespace AgendaApp.Models
         public IList<Evento> consultarSegundas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Monday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Monday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -139,10 +121,12 @@ namespace AgendaApp.Models
         public IList<Evento> consultarTercas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Tuesday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Tuesday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -150,10 +134,12 @@ namespace AgendaApp.Models
         public IList<Evento> consultarQuartas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Wednesday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Wednesday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -161,10 +147,12 @@ namespace AgendaApp.Models
         public IList<Evento> consultarQuintas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Thursday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Thursday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -172,10 +160,12 @@ namespace AgendaApp.Models
         public IList<Evento> consultarSextas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Friday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId && 
+                        a.DiaDaSemana == DayOfWeek.Friday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -183,10 +173,25 @@ namespace AgendaApp.Models
         public IList<Evento> consultarSabados()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
             List<Evento> eventos = db.Eventos
-                .Where(a => a.UsuarioAtivo.Id == userId)
-                .Where(a => a.DiaDaSemana == DayOfWeek.Saturday).ToList();
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Saturday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
+
+            return eventos;
+        }
+
+        public IList<Evento> consultarDomingos()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
+
+            List<Evento> eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.SemanaDoMes == semanaDoMes).ToList();
 
             return eventos;
         }
@@ -288,19 +293,9 @@ namespace AgendaApp.Models
             return us;
         }
 
-        
-
-        //public static List<DateTime> GetDates(int year, int month)
-        //{
-        //    var dates = new List<DateTime>();
-
-        //    // Loop from the first day of the month until we hit the next month, moving forward a day at a time
-        //    for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
-        //    {
-        //        dates.Add(date);
-        //    }
-
-        //    return dates;
-        //}
+        public int consultaSemanaDoMes(DateTime TargetDate)
+        {
+            return (TargetDate.Day - 1) / 7 + 1;
+        }
     }
 }

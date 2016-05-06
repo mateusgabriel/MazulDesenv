@@ -13,12 +13,12 @@ namespace AgendaApp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201509031432393_Evento"; }
+            get { return "201605062200379_Evento"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

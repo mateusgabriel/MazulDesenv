@@ -66,7 +66,6 @@
                             <div class="card-content">
                                 <span class="card-title activator grey-text text-darken-4">
                                     @item.Horario.ToString(@"hh\:mm")
-                                    @*@item.DataEvento.ToShortDateString()*@
                                     <i class="material-icons right">reorder</i>
                                 </span>
                                 <p>
@@ -83,20 +82,29 @@
                                 {
                                     foreach (var contato in item.UsuariosPassivos)
                                     {
-                                        <p>@contato.Nome @contato.Sobrenome</p>
+                                        <p>
+                                            @contato.Nome @contato.Sobrenome
+                                        </p>
                                     }
                                 }
                                 else
                                 {
-                                    <p>Nenhum integrante</p>
+                                    <p>
+                                        Nenhum integrante
+                                    </p>
                                 }
-                                <p>@item.Local</p>
+                                <p>
+                                    @item.Local
+                                </p>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4">@item.Nome<i class="material-icons right">close</i></span>
-                                <p>@item.Descricao</p>
-                                <p>@item.Periodicidade</p>
-                                @*<p><span> <a class="grey-text text-darken-4 right" href="@Url.Action(" visualizar", "Evento" , new { id=item.Id })"><i class="material-icons">content_paste</i></a></span> </p>*@
+                                <p>
+                                    @item.Descricao
+                                </p>
+                                <p>
+                                    @item.Periodicidade
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -106,779 +114,418 @@
     </div>
 
     <div id="semana">
-        @{
-            switch (Model.SemanaDoMes)
-            {
-                case 1:
-                    Model.EventosDomingo = Model.EventosPrimeiroDomingo;
-                    //eventosSegunda = Model.;
-                    //eventosTerca = Model.;
-                    //eventosQuarta = Model.;
-                    //eventosQuinta = Model.;
-                    //eventosSexta = Model.EventosPrimeiroDomingo;
-                    //eventosSabado = Model.EventosPrimeiroDomingo;
-                    break;
-                case 2:
-                    Model.EventosDomingo = Model.EventosSegundoDomingo;
-                    //eventosSegunda = Model.;
-                    //eventosTerca = Model.;
-                    //eventosQuarta = Model.;
-                    //eventosQuinta = Model.;
-                    //eventosSexta = Model.EventosPrimeiroDomingo;
-                    //eventosSabado = Model.EventosPrimeiroDomingo;
-                    break;
-                case 3:
-                    Model.EventosDomingo = Model.EventosTerceiroDomingo;
-                    //eventosSegunda = Model.;
-                    //eventosTerca = Model.;
-                    //eventosQuarta = Model.;
-                    //eventosQuinta = Model.;
-                    //eventosSexta = Model.EventosPrimeiroDomingo;
-                    //eventosSabado = Model.EventosPrimeiroDomingo;
-                    break;
-                case 4:
-                    Model.EventosDomingo = Model.EventosQuartoDomingo;
-                    //eventosSegunda = Model.;
-                    //eventosTerca = Model.;
-                    //eventosQuarta = Model.;
-                    //eventosQuinta = Model.;
-                    //eventosSexta = Model.EventosPrimeiroDomingo;
-                    //eventosSabado = Model.EventosPrimeiroDomingo;
-                    break;
-                case 5:
-                    //eventosSegunda = Model.;
-                    //eventosTerca = Model.;
-                    //eventosQuarta = Model.;
-                    //eventosQuinta = Model.;
-                    //eventosSexta = Model.EventosPrimeiroDomingo;
-                    //eventosSabado = Model.EventosPrimeiroDomingo;
-                    break;
-            }
-
-        }
-
-
-        @*<ul id="eventosSemanaisList">
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center white-text flow-text">Dom</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Seg</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Ter</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Qua</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Qui</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Sex</h5>
-                    </div>
-                </li>
-                <li style="transform: translateX(0px); opacity: 0;">
-                    <div class="card blue darken-3 col custom1 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Sáb</h5>
-                    </div>
-                </li>
-            </ul>*@
-        <div class="col s12 customM customL">
-            <ul id="eventosDomingo">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center white-text flow-text">Dom</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosDomingo)
-                {
+        <ul id="eventosSemanaisList">
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Dom</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosSegunda">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Seg</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosSegunda)
-                {
+                    @foreach (var item in Model.EventosDomingo)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Seg</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosTerca">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Ter</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosTerca)
-                {
+                    @foreach (var item in Model.EventosSegunda)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Ter</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosQuarta">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Qua</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosQuarta)
-                {
+                    @foreach (var item in Model.EventosTerca)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Qua</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosQuinta">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Qui</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosQuinta)
-                {
+                    @foreach (var item in Model.EventosQuarta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Qui</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosSexta">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Sex</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosSexta)
-                {
+                    @foreach (var item in Model.EventosQuinta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue col darken-3 s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Sex</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col s12 customM customL">
-            <ul id="eventosSabado">
-
-                <li style="transform: translateX(0px); opacity: 0; padding-bottom:5px">
-                    <div class="card blue darken-3 grid-example">
-                        <h5 style=" padding: 15px" class="center flow-text">Sáb</h5>
-                    </div>
-                </li>
-
-                @foreach (var item in Model.EventosSabado)
-                {
+                    @foreach (var item in Model.EventosSexta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
                     <li style="transform: translateX(0px); opacity: 0;">
-                        <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:5px; padding-left:10px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome em @item.Local
-                            </p>
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Sab</h5>
                         </div>
                     </li>
-                }
-            </ul>
-        </div>
-
+                    @foreach (var item in Model.EventosSabado)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </ul>
     </div>
 
     <div id="mes">
         <ul id="eventosMensaisList">
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center white-text flow-text">Dom</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Seg</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Ter</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Qua</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Qui</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Sex</h5>
-                </div>
-            </li>
-            <li style="transform: translateX(0px); opacity: 0;">
-                <div class="card blue darken-3 col custom1 grid-example">
-                    <h5 style=" padding: 15px" class="center flow-text">Sáb</h5>
-                </div>
-            </li>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Dom</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosSegundoDomingo)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Seg</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosSegunda)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Ter</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosTerca)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Qua</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosQuarta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Qui</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosQuinta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue col darken-3 s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Sex</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosSexta)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col s12 lhalf">
+                <ul>
+                    <li style="transform: translateX(0px); opacity: 0;">
+                        <div class="card blue darken-3 col s12 m6 l12">
+                            <h5 style="margin: 15px" class="center white-text flow-text">Sab</h5>
+                        </div>
+                    </li>
+                    @foreach (var item in Model.EventosSabado)
+                    {
+                        <li class="" style="transform: translateX(0px); opacity: 0;">
+                            <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
+                                <span class="card-title grey-text text-darken-4">
+                                    <span class="left">
+                                        @item.Horario.ToString(@"hh\:mm")
+                                    </span>
+                                    <span style="margin-top:5px; padding-left:10px" class="right">
+                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>
+                                    </span>
+                                </span>
+                                <br />
+                                <p>
+                                    @item.Nome em @item.Local
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
         </ul>
-        <div class="col custom1">
-            <ul id="eventosPrimeiroDomingo">
-                @foreach (var item in Model.EventosPrimeiroDomingo)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <ul id="eventosSegundoDomingo">
-                @foreach (var item in Model.EventosSegundoDomingo)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <ul id="eventosTerceiroDomingo">
-                @foreach (var item in Model.EventosTerceiroDomingo)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <ul id="eventosQuartoDomingo">
-                @foreach (var item in Model.EventosQuartoDomingo)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="col custom1">
-            <ul id="eventosSegunda">
-                @foreach (var item in Model.EventosSegunda)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col custom1">
-            <ul id="eventosTerca">
-                @foreach (var item in Model.EventosTerca)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col custom1">
-            <ul id="eventosQuarta">
-                @foreach (var item in Model.EventosQuarta)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col custom1">
-            <ul id="eventosQuinta">
-                @foreach (var item in Model.EventosQuinta)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col custom1">
-            <ul id="eventosSexta">
-                @foreach (var item in Model.EventosSexta)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col custom1">
-            <ul id="eventosSabado">
-                @foreach (var item in Model.EventosSabado)
-                {
-                    <li style="transform: translateX(0px); opacity: 0;">
-                        <div class="card hoverable">
-                            <span class="card-title grey-text text-darken-4">
-                                <span style="margin-top:10px;" class="left">
-                                    @item.Horario.ToString(@"hh\:mm")
-                                </span>
-                                <span style="margin-top:15px; margin-right:-15px" class="right">
-                                    <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                    <label for="@item.Id"></label>
-                                </span>
-                            </span>
-                            <br />
-                            <p>
-                                @item.Nome com
-                                @if (item.UsuariosPassivos.Any())
-                                {
-                                    foreach (var contato in item.UsuariosPassivos)
-                                    {
-                                        <span>@contato.Nome @contato.Sobrenome</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>Nenhum integrante</span>
-                                }
-                                em @item.Local
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        @*<ul>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>1</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>8</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>15</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>22</p></div>
-                        @*<div class="card blue darken-3 grid-example-custom"><p>29</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>2</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>9</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>16</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>23</p></div>
-                        @*<div class="card blue darken-3 grid-example-custom"><p>30</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>3</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>10</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>17</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>24</p></div>
-                        @*<div class="card blue darken-3 grid-example-custom"><p>29</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>4</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>11</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>18</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>25</p></div>
-                        @*<div class="card blue darken-3 grid-example-custom"><p>29</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>5</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>12</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>19</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>26</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>6</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>13</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>20</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>27</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="col custom2 center">
-                        <div class="card blue darken-3 grid-example-custom"><p>7</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>14</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>21</p></div>
-                        <div class="card blue darken-3 grid-example-custom"><p>28</p></div>
-                    </div>
-                </li>
-            </ul>*@
     </div>
 </body>
