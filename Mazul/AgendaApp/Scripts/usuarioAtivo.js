@@ -2,7 +2,7 @@
 var itemId;
 
 usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $window) {
-    $scope.master = {};
+     $scope.master = {};
 
     $scope.update = function (user) {
         $scope.master = angular.copy(user);
@@ -66,7 +66,8 @@ usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $w
             url: '/UsuarioAtivo/Inserir',
             method: 'GET'
         })
-            .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {              
+              
                 //$window.location = "/UsuarioAtivo/Index"
             })
             .error(function (error) {

@@ -39,32 +39,33 @@ namespace AgendaApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
+                /*  UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
 
-                usuarioAtivo.Id = usuarioAtivoViewModels.Id;
-                usuarioAtivo.Nome = usuarioAtivoViewModels.Nome;
-                usuarioAtivo.Sobrenome = usuarioAtivoViewModels.Sobrenome;
-                usuarioAtivo.Endereco = usuarioAtivoViewModels.Endereco;
-                usuarioAtivo.Telefone = usuarioAtivoViewModels.Telefone;
-                usuarioAtivo.Email = usuarioAtivoViewModels.Email;
-                usuarioAtivo.Senha = usuarioAtivoViewModels.Senha;
-                if (usuarioAtivoViewModels.Sexo == "1")
-                {
-                    usuarioAtivo.Sexo = 1;
-                }
-                else
-                {
-                    usuarioAtivo.Sexo = 2;
-                }
+                  usuarioAtivo.Id = usuarioAtivoViewModels.Id;
+                  usuarioAtivo.Nome = usuarioAtivoViewModels.Nome;
+                  usuarioAtivo.Sobrenome = usuarioAtivoViewModels.Sobrenome;
+                  usuarioAtivo.Endereco = usuarioAtivoViewModels.Endereco;
+                  usuarioAtivo.Telefone = usuarioAtivoViewModels.Telefone;
+                  usuarioAtivo.Email = usuarioAtivoViewModels.Email;
+                  usuarioAtivo.Senha = usuarioAtivoViewModels.Senha;
+                  if (usuarioAtivoViewModels.Sexo == "1")
+                  {
+                      usuarioAtivo.Sexo = 1;
+                  }
+                  else
+                  {
+                      usuarioAtivo.Sexo = 2;
+                  }
 
-                if (!models.inserirUsuarioAtivo(usuarioAtivo)) 
-                {
-                    ModelState.AddModelError("PasswordError", "A senha deve conter ao menos 7 caracteres sendo no mínimo um numérico, um símbolo especial e uma letra maiúscula.");
-                }
-                else
-                {
+                  if (!models.inserirUsuarioAtivo(usuarioAtivo)) 
+                  {
+                      ModelState.AddModelError("PasswordError", "A senha deve conter ao menos 7 caracteres sendo no mínimo um numérico, um símbolo especial e uma letra maiúscula.");
+                  }
+                  else
+                  {*/
+                TempData["SucessoInserir"] = "Cadastrado com sucesso. Entre em sua conta!";
                     return RedirectToAction("Login","Home");
-                }
+                //}
             }
             else
             {
