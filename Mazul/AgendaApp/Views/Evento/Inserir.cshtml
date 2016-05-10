@@ -42,7 +42,7 @@
 
         @Html.ValidationSummary(true)
         <form class="col s12">
-
+            @Html.ValidationMessage("FieldsError")
             <div class="row">
                 <div class="input-field col s12 m6 l6">
                     <i class="material-icons prefix">bookmark</i>
@@ -101,6 +101,10 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+
+            <div style="padding-left:15px" class="row">
+                @Html.ValidationMessage("ErrorMail")
             </div>
 
             <div class="row">
