@@ -352,6 +352,7 @@ namespace AgendaApp.Controllers
             var eventosSegundoDomingo = models.consultarSegundoDomingo();
             var eventosTerceiroDomingo = models.consultarTerceiroDomingo();
             var eventosQuartoDomingo = models.consultarQuartoDomingo();
+            var eventosQuintoDomingo = models.consultarQuintoDomingo();
 
             eventosViewModel.EventosDiarios = eventosDiarios;
             eventosViewModel.EventosDomingo = eventosDomingo;
@@ -367,6 +368,7 @@ namespace AgendaApp.Controllers
             eventosViewModel.EventosSegundoDomingo = eventosSegundoDomingo;
             eventosViewModel.EventosTerceiroDomingo = eventosTerceiroDomingo;
             eventosViewModel.EventosQuartoDomingo = eventosQuartoDomingo;
+            eventosViewModel.EventosQuintoDomingo = eventosQuintoDomingo;
 
             return eventosViewModel;
         }

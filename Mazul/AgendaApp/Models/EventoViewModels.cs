@@ -59,6 +59,8 @@ namespace AgendaApp.Models
 
         public ICollection<Evento> EventosQuartoDomingo { get; set; }
 
+        public ICollection<Evento> EventosQuintoDomingo { get; set; }
+
         public int SemanaDoMes { get; set; }
 
         private List<string> _itens;
