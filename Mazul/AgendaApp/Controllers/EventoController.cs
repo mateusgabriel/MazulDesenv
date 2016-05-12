@@ -192,27 +192,36 @@ namespace AgendaApp.Controllers
                     }
                     evento.UsuariosPassivos = usuariosPassivos;
 
-                    foreach (var email in contatosEmail)
+                    try
                     {
-                        var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
-                        var usuarioEmail = evento.UsuarioAtivo.Email;
-                        string body = @"<html><body>
+                        foreach (var email in contatosEmail)
+                        {
+                            throw new SmtpException();
+                            var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
+                            var usuarioEmail = evento.UsuarioAtivo.Email;
+                            string body = @"<html><body>
                                             <p>Olá! <br/><br/>" + usuarioNome + " remarcou " + evento.Nome + " com você no(a) " + evento.Local +
-                                                           " para o dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
-                                            ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente,</p></body></html>";
+                                                               " para o dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
+                                                ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente,</p></body></html>";
 
-                        MailMessage mail = new MailMessage(usuarioEmail, email, evento.Nome, body);
-                        mail.From = new MailAddress(usuarioEmail, usuarioNome);
-                        mail.IsBodyHtml = true; // necessary if you're using html email
+                            MailMessage mail = new MailMessage(usuarioEmail, email, evento.Nome, body);
+                            mail.From = new MailAddress(usuarioEmail, usuarioNome);
+                            mail.IsBodyHtml = true; // necessary if you're using html email
 
-                        NetworkCredential credential = new NetworkCredential("mazulapp@gmail.com", "Asdzxc123$");
-                        SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                        smtp.EnableSsl = true;
-                        smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = credential;
-                        smtp.Send(mail);
-                        i++;
-                    }
+                            NetworkCredential credential = new NetworkCredential("mazulapp@gmail.com", "Asdzxc123$");
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = credential;
+                            smtp.Send(mail);
+                            i++;
+                        }
+                    }  catch (SmtpException e)
+                        {
+                            TempData["ErrorMail"] = "Houve um problema e o contato não foi notificado sobre este evento. Fique tranquilo, já estamos solucionando o problema.";
+                            //ModelState.AddModelError("ErrorMail", "Ocorreu um erro ao enviar email para contato. Fique tranquilo, já estamos solucionando o problema." + e);
+                        }
+
                 }
 
                 models.editarEvento(evento);
