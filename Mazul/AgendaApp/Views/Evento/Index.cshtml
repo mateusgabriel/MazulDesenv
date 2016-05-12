@@ -6,6 +6,11 @@
     }
     <script type="text/javascript" src="~/Scripts/evento.js"></script>
     <title>Index</title>
+     
+    <script>
+        alerta('@TempData["ErrorMail"]', 'erro');
+    </script>
+    
 </head>
 
 <body ng-app="eventoApp" ng-controller="EventoController">

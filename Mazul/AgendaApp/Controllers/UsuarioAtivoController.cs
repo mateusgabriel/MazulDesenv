@@ -39,7 +39,7 @@ namespace AgendaApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*  UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
+                  UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
 
                   usuarioAtivo.Id = usuarioAtivoViewModels.Id;
                   usuarioAtivo.Nome = usuarioAtivoViewModels.Nome;
@@ -62,10 +62,10 @@ namespace AgendaApp.Controllers
                       ModelState.AddModelError("PasswordError", "A senha deve conter ao menos 7 caracteres sendo no mínimo um numérico, um símbolo especial e uma letra maiúscula.");
                   }
                   else
-                  {*/
-                TempData["SucessoInserir"] = "Cadastrado com sucesso. Entre em sua conta!";
+                  {
+                    TempData["SucessoInserir"] = "Cadastrado com sucesso. Entre em sua conta!";
                     return RedirectToAction("Login","Home");
-                //}
+                  }
             }
             else
             {
