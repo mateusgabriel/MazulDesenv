@@ -15,127 +15,132 @@ namespace AgendaApp.Models
         public IList<Evento> consultarEventos()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-            List<Evento> eventos = db.Eventos.Where(a => a.UsuarioAtivo.Id == userId).ToList();
+            var eventos = db.Eventos.Where(a => a.UsuarioAtivo.Id == userId).ToList();
 
             return eventos;
         }
 
-        public IList<Evento> consultarEventosDiarios()
+        public List<Evento> consultarEventosDiarios()
         {
             var date = DateTime.Now.Date;
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId && a.DataEvento == date).ToList();
 
             return eventos;
         }
 
-        public int quantidadeDomigosNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdDomigosNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
         }
 
-        public int quantidadeSegundasNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdSegundasNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Monday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Monday);
         }
 
-        public int quantidadeTercasNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdTercasNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Tuesday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Tuesday);
         }
 
-        public int quantidadeQuartasNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdQuartasNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Wednesday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Wednesday);
         }
 
-        public int quantidadeQuintasNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdQuintasNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Thursday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Thursday);
         }
 
-        public int quantidadeSextasNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdSextasNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Friday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Friday);
         }
 
-        public int quantidadeSabadosNoMes(int mes, int ano, DayOfWeek dia)
+        public List<DateTime> consultarQtdSabadosNoMes()
         {
-            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Saturday).Count();
+            return consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Saturday);
         }
 
         #region domingosDoMês
         //Consulta todos as datas de domingo do mês e usa apenas a data do primeiro domingo
-        public IList<Evento> consultarPrimeiroDomingo()
+        public List<Evento> consultarPrimeiroDomingo()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
+            DateTime primeiroDomingo = dias[0];
+
+            var eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.DataEvento == primeiroDomingo).ToList();
+
+            return eventos;
+        }
+
+        public List<Evento> consultarSegundoDomingo()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
+            DateTime segundoDomingo = dias[1];
+
+            var eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.DataEvento == segundoDomingo).ToList();
+
+            return eventos;
+        }
+
+        public List<Evento> consultarTerceiroDomingo()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
+            DateTime terceiroDomingo = dias[2];
+
+            var eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.DataEvento == terceiroDomingo).ToList();
+
+            return eventos;
+        }
+
+        public List<Evento> consultarQuartoDomingo()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
+            DateTime quartoDomingo = dias[3];
+
+            var eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.DataEvento == quartoDomingo).ToList();
+
+            return eventos;
+        }
+
+        public List<Evento> consultarQuintoDomingo()
+        {
+            var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+            var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
+            var quintoDomingo = dias.Count() > 4 ? dias[4] : default(DateTime);
+            var eventos = new List<Evento>();
+
+            if (quintoDomingo != default(DateTime))
             {
-                var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-                var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
-                DateTime primeiroDomingo = dias[0];
-
-                List<Evento> eventos = db.Eventos
-                    .Where(a => a.UsuarioAtivo.Id == userId &&
-                            a.DiaDaSemana == DayOfWeek.Sunday &&
-                                a.DataEvento == primeiroDomingo).ToList();
-
-                return eventos;
+                eventos = db.Eventos
+                .Where(a => a.UsuarioAtivo.Id == userId &&
+                        a.DiaDaSemana == DayOfWeek.Sunday &&
+                            a.DataEvento == quintoDomingo).ToList();
             }
+                
 
-            public IList<Evento> consultarSegundoDomingo()
-            {
-                var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-                var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
-                DateTime segundoDomingo = dias[1];
-
-                List<Evento> eventos = db.Eventos
-                    .Where(a => a.UsuarioAtivo.Id == userId &&
-                            a.DiaDaSemana == DayOfWeek.Sunday &&
-                                a.DataEvento == segundoDomingo).ToList();
-
-                return eventos;
-            }
-
-            public IList<Evento> consultarTerceiroDomingo()
-            {
-                var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-                var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
-                DateTime terceiroDomingo = dias[2];
-
-                List<Evento> eventos = db.Eventos
-                    .Where(a => a.UsuarioAtivo.Id == userId &&
-                            a.DiaDaSemana == DayOfWeek.Sunday &&
-                                a.DataEvento == terceiroDomingo).ToList();
-
-                return eventos;
-            }
-
-            public IList<Evento> consultarQuartoDomingo()
-            {
-                var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-                var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
-                DateTime quartoDomingo = dias[3];
-
-                List<Evento> eventos = db.Eventos
-                    .Where(a => a.UsuarioAtivo.Id == userId &&
-                            a.DiaDaSemana == DayOfWeek.Sunday &&
-                                a.DataEvento == quartoDomingo).ToList();
-
-                return eventos;
-            }
-
-            public IList<Evento> consultarQuintoDomingo()
-            {
-                var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-                var dias = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Sunday);
-                DateTime quintoDomingo = dias[4];
-
-                List<Evento> eventos = db.Eventos
-                    .Where(a => a.UsuarioAtivo.Id == userId &&
-                            a.DiaDaSemana == DayOfWeek.Sunday &&
-                                a.DataEvento == quintoDomingo).ToList();
-
-                return eventos;
-            }
+            return eventos;
+        }
         #endregion
 
         #region segundasDoMÊs
@@ -228,8 +233,9 @@ namespace AgendaApp.Models
 
         public List<DateTime> consultarDiaNasSemanasDoMes(int mes, int ano, DayOfWeek dia)
         {
-            List<DateTime> diaNasSemanasDoMes = new List<DateTime>();
-            DateTime primeiroDiadoMes = new DateTime(ano, mes, 1);
+            mes = 6;
+            var diaNasSemanasDoMes = new List<DateTime>();
+            var primeiroDiadoMes = new DateTime(ano, mes, 1);
             DateTime diaAtual = primeiroDiadoMes;
 
             while (primeiroDiadoMes.Month == diaAtual.Month)
@@ -246,12 +252,12 @@ namespace AgendaApp.Models
             return diaNasSemanasDoMes;
         }
 
-        public IList<Evento> consultarSegundas()
+        public List<Evento> consultarSegundas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Monday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -259,12 +265,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarTercas()
+        public List<Evento> consultarTercas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Tuesday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -272,12 +278,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarQuartas()
+        public List<Evento> consultarQuartas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Wednesday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -285,12 +291,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarQuintas()
+        public List<Evento> consultarQuintas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Thursday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -298,12 +304,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarSextas()
+        public List<Evento> consultarSextas()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId && 
                         a.DiaDaSemana == DayOfWeek.Friday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -311,12 +317,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarSabados()
+        public List<Evento> consultarSabados()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Saturday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -324,12 +330,12 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarDomingos()
+        public List<Evento> consultarDomingos()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
 
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
                         a.DiaDaSemana == DayOfWeek.Sunday &&
                             a.SemanaDoMes == semanaDoMes).ToList();
@@ -337,10 +343,10 @@ namespace AgendaApp.Models
             return eventos;
         }
 
-        public IList<Evento> consultarEventosMensais()
+        public List<Evento> consultarEventosMensais()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-            List<Evento> eventos = db.Eventos
+            var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId).ToList();
 
             return eventos;
@@ -436,7 +442,7 @@ namespace AgendaApp.Models
 
         public int consultaSemanaDoMes(DateTime TargetDate)
         {
-            return (TargetDate.Day - 1) / 7 + 1;
+            return (TargetDate.Day - 1) / 7 + 2;
         }
     }
 }

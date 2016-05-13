@@ -339,6 +339,15 @@ namespace AgendaApp.Controllers
         {
             var eventosViewModel = new EventoViewModels();
 
+            CarregarListaEventosDiarios(eventosViewModel);
+            CarregarListaEventosMensais(eventosViewModel);
+            CarregarListaQuantidadeEventos(eventosViewModel);
+
+            return eventosViewModel;
+        }
+
+        public EventoViewModels CarregarListaEventosDiarios(EventoViewModels eventosDiariosViewModel)
+        {
             var eventosDiarios = models.consultarEventosDiarios();
             var eventosDomingo = models.consultarDomingos();
             var eventosSegunda = models.consultarSegundas();
@@ -347,6 +356,22 @@ namespace AgendaApp.Controllers
             var eventosQuinta = models.consultarQuintas();
             var eventosSexta = models.consultarSextas();
             var eventosSabado = models.consultarSabados();
+
+            eventosDiariosViewModel.EventosDiarios = eventosDiarios;
+            eventosDiariosViewModel.EventosDomingo = eventosDomingo;
+            eventosDiariosViewModel.EventosSegunda = eventosSegunda;
+            eventosDiariosViewModel.EventosTerca = eventosTerca;
+            eventosDiariosViewModel.EventosQuarta = eventosQuarta;
+            eventosDiariosViewModel.EventosQuinta = eventosQuinta;
+            eventosDiariosViewModel.EventosSexta = eventosSexta;
+            eventosDiariosViewModel.EventosSabado = eventosSabado;
+            eventosDiariosViewModel.EventosDomingo = eventosDomingo;
+
+            return eventosDiariosViewModel;
+        }
+
+        public EventoViewModels CarregarListaEventosMensais(EventoViewModels eventosMensaisViewModel)
+        {
             var eventosMensais = models.consultarEventosMensais();
             var eventosPrimeiroDomingo = models.consultarPrimeiroDomingo();
             var eventosSegundoDomingo = models.consultarSegundoDomingo();
@@ -354,23 +379,36 @@ namespace AgendaApp.Controllers
             var eventosQuartoDomingo = models.consultarQuartoDomingo();
             var eventosQuintoDomingo = models.consultarQuintoDomingo();
 
-            eventosViewModel.EventosDiarios = eventosDiarios;
-            eventosViewModel.EventosDomingo = eventosDomingo;
-            eventosViewModel.EventosSegunda = eventosSegunda;
-            eventosViewModel.EventosTerca = eventosTerca;
-            eventosViewModel.EventosQuarta = eventosQuarta;
-            eventosViewModel.EventosQuinta = eventosQuinta;
-            eventosViewModel.EventosSexta = eventosSexta;
-            eventosViewModel.EventosSabado = eventosSabado;
-            eventosViewModel.EventosMensais = eventosMensais;
-            eventosViewModel.EventosDomingo = eventosDomingo;
-            eventosViewModel.EventosPrimeiroDomingo = eventosPrimeiroDomingo;
-            eventosViewModel.EventosSegundoDomingo = eventosSegundoDomingo;
-            eventosViewModel.EventosTerceiroDomingo = eventosTerceiroDomingo;
-            eventosViewModel.EventosQuartoDomingo = eventosQuartoDomingo;
-            eventosViewModel.EventosQuintoDomingo = eventosQuintoDomingo;
+            eventosMensaisViewModel.EventosMensais = eventosMensais;
+            eventosMensaisViewModel.EventosPrimeiroDomingo = eventosPrimeiroDomingo;
+            eventosMensaisViewModel.EventosSegundoDomingo = eventosSegundoDomingo;
+            eventosMensaisViewModel.EventosTerceiroDomingo = eventosTerceiroDomingo;
+            eventosMensaisViewModel.EventosQuartoDomingo = eventosQuartoDomingo;
+            eventosMensaisViewModel.EventosQuintoDomingo = eventosQuintoDomingo;
 
-            return eventosViewModel;
+            return eventosMensaisViewModel;
         }
+
+        public EventoViewModels CarregarListaQuantidadeEventos(EventoViewModels quantidadeEventosMensaisViewModel)
+        {
+            var quantidadeDomingosMes = models.consultarQtdDomigosNoMes();
+            var quantidadeSegundasMes = models.consultarQtdSegundasNoMes();
+            var quantidadeTercasMes = models.consultarQtdTercasNoMes();
+            var quantidadeQuartasMes = models.consultarQtdQuartasNoMes();
+            var quantidadeQuintasMes = models.consultarQtdQuintasNoMes();
+            var quantidadeSextasMes = models.consultarQtdSextasNoMes();
+            var quantidadeSabadosMes = models.consultarQtdSabadosNoMes();
+
+            quantidadeEventosMensaisViewModel.QuantidadeDomingosMes = quantidadeDomingosMes;
+            quantidadeEventosMensaisViewModel.QuantidadeSegundasMes = quantidadeSegundasMes;
+            quantidadeEventosMensaisViewModel.QuantidadeTercasMes = quantidadeTercasMes;
+            quantidadeEventosMensaisViewModel.QuantidadeQuartasMes = quantidadeQuartasMes;
+            quantidadeEventosMensaisViewModel.QuantidadeQuintasMes = quantidadeQuintasMes;
+            quantidadeEventosMensaisViewModel.QuantidadeSextasMes = quantidadeSextasMes;
+            quantidadeEventosMensaisViewModel.QuantidadeSabadosMes = quantidadeSabadosMes;
+
+            return quantidadeEventosMensaisViewModel;
+        }
+
     }
 }

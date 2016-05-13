@@ -3,6 +3,7 @@
 <head>
     @{
         ViewBag.Title = "Index";
+        bool existeCardInvisivel = true;
     }
     <script type="text/javascript" src="~/Scripts/evento.js"></script>
     <title>Index</title>
@@ -29,7 +30,7 @@
                 <li><a class="btn-floating btn waves-effect waves-light yellow" ng-click="visualizar()"><i class="material-icons"><i class="material-icons">pageview</i></i></a></li>
             </span>
             <li>
-                <a class="btn-floating btn waves-effect waves-light light-blue darken-3" href="#" onclick="location.href='@Url.Action("inserir", "Evento" )'">
+                <a class="btn-floating btn waves-effect waves-light light-blue darken-3" href="#" onclick="location.href='@Url.Action("inserir", "Evento")'">
                     <i class="material-icons">add</i>
                 </a>
             </li>
@@ -330,26 +331,33 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Dom</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosPrimeiroDomingo)
+                    
+                    @foreach (var item in Model.QuantidadeDomingosMes)
                     {
+                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        {
+                            <li class="" style="transform: translateX(0px); opacity: 0;">
+                                <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
+                                    @*<span class="card-title grey-text text-darken-4">
+                                    </span>*@
+                                </div>
+                            </li>
+                            existeCardInvisivel = false;
+                        }
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        <span class="new badge">@Model.EventosPrimeiroDomingo.Count() Eventos</span>
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
-                    }
+                        }
                 </ul>
             </div>
             <div class="col s12 lhalf">
@@ -359,23 +367,29 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Seg</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosSegundoDomingo)
+                    @foreach (var item in Model.QuantidadeSegundasMes)
                     {
+                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        {
+                            <li class="" style="transform: translateX(0px); opacity: 0;">
+                                <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
+                                    @*<span class="card-title grey-text text-darken-4">
+                                    </span>*@
+                                </div>
+                            </li>
+                            existeCardInvisivel = false;
+                        }
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }
@@ -388,23 +402,30 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Ter</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosTerca)
+                    @foreach (var item in Model.QuantidadeTercasMes)
                     {
+                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        {
+                            <li class="" style="transform: translateX(0px); opacity: 0;">
+                                <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
+                                    @*<span class="card-title grey-text text-darken-4">
+                                        </span>*@
+                                </div>
+                            </li>
+                            existeCardInvisivel = false;
+                        }
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>*@
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }
@@ -417,23 +438,30 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Qua</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosQuarta)
+                    @foreach (var item in Model.QuantidadeQuartasMes)
                     {
+                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        {
+                            <li class="" style="transform: translateX(0px); opacity: 0;">
+                                <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
+                                    @*<span class="card-title grey-text text-darken-4">
+                                        </span>*@
+                                </div>
+                            </li>
+                            existeCardInvisivel = false;
+                        }
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>*@
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }
@@ -446,23 +474,30 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Qui</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosQuinta)
+                    @foreach (var item in Model.QuantidadeQuintasMes)
                     {
+                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        {
+                            <li class="" style="transform: translateX(0px); opacity: 0;">
+                                <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
+                                    @*<span class="card-title grey-text text-darken-4">
+                                        </span>*@
+                                </div>
+                            </li>
+                            existeCardInvisivel = false;
+                        }
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>*@
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }
@@ -475,23 +510,19 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Sex</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosSexta)
+                    @foreach (var item in Model.QuantidadeSextasMes)
                     {
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>*@
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }
@@ -504,23 +535,19 @@
                             <h5 style="margin: 15px" class="center white-text flow-text">Sab</h5>
                         </div>
                     </li>
-                    @foreach (var item in Model.EventosSabado)
+                    @foreach (var item in Model.QuantidadeSabadosMes)
                     {
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
-                                    <span class="left">
-                                        @item.Horario.ToString(@"hh\:mm")
+                                    <span class="left" style="font-size: 16px;">
+                                        @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>
+                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
+                                        <label for="@item.Id"></label>*@
                                     </span>
                                 </span>
-                                <br />
-                                <p>
-                                    @item.Nome em @item.Local
-                                </p>
                             </div>
                         </li>
                     }

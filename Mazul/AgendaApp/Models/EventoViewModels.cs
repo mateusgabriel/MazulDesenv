@@ -33,35 +33,61 @@ namespace AgendaApp.Models
 
         public ICollection<UsuarioPassivoViewModels> UsuariosPassivos { get; set; }
 
-        public ICollection<Evento> EventosDiarios { get; set; }
+        public List<Evento> EventosDiarios { get; set; }
 
-        public ICollection<Evento> EventosDomingo { get; set; }
+        public List<Evento> EventosDomingo { get; set; }
 
-        public ICollection<Evento> EventosSegunda { get; set; }
+        public List<Evento> EventosSegunda { get; set; }
 
-        public ICollection<Evento> EventosTerca { get; set; }
+        public List<Evento> EventosTerca { get; set; }
 
-        public ICollection<Evento> EventosQuarta { get; set; }
+        public List<Evento> EventosQuarta { get; set; }
 
-        public ICollection<Evento> EventosQuinta { get; set; }
+        public List<Evento> EventosQuinta { get; set; }
 
-        public ICollection<Evento> EventosSexta { get; set; }
+        public List<Evento> EventosSexta { get; set; }
 
-        public ICollection<Evento> EventosSabado { get; set; }
+        public List<Evento> EventosSabado { get; set; }
 
-        public ICollection<Evento> EventosMensais { get; set; }
+        public List<Evento> EventosMensais { get; set; }
 
-        public ICollection<Evento> EventosPrimeiroDomingo { get; set; }
+        public List<Evento> EventosPrimeiroDomingo { get; set; }
 
-        public ICollection<Evento> EventosSegundoDomingo { get; set; }
+        public List<Evento> EventosSegundoDomingo { get; set; }
 
-        public ICollection<Evento> EventosTerceiroDomingo { get; set; }
+        public List<Evento> EventosTerceiroDomingo { get; set; }
 
-        public ICollection<Evento> EventosQuartoDomingo { get; set; }
+        public List<Evento> EventosQuartoDomingo { get; set; }
 
-        public ICollection<Evento> EventosQuintoDomingo { get; set; }
+        public List<Evento> EventosQuintoDomingo { get; set; }
+
+        public List<Evento> EventosPrimeiraSegunda { get; set; }
+
+        public List<Evento> EventosSegundaSegunda { get; set; }
+
+        public List<Evento> EventosTerceiraSegunda { get; set; }
+
+        public List<Evento> EventosQuartaSegunda { get; set; }
+
+        public List<Evento> EventosQuintaSegunda { get; set; }
 
         public int SemanaDoMes { get; set; }
+
+        public List<DateTime> QuantidadeDomingosMes { get; set; }
+
+        public List<DateTime> QuantidadeSegundasMes { get; set; }
+
+        public List<DateTime> QuantidadeTercasMes { get; set; }
+
+        public List<DateTime> QuantidadeQuartasMes { get; set; }
+
+        public List<DateTime> QuantidadeQuintasMes { get; set; }
+
+        public List<DateTime> QuantidadeSextasMes { get; set; }
+
+        public List<DateTime> QuantidadeSabadosMes { get; set; }
+
+
 
         private List<string> _itens;
 
