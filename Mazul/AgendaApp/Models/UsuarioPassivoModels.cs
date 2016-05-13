@@ -37,7 +37,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception(ex.Message);
             }
         }
 
@@ -50,17 +50,23 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception(ex.Message);
             }
         }
 
         public void inserirUsuarioPassivo(UsuarioPassivo usuarioPassivo)
         {
-            var id = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-            UsuarioAtivo us = db.UsuariosAtivos.SingleOrDefault(a => a.Id == id);
-            usuarioPassivo.UsuarioAtivo = us;
-            db.UsuariosPassivos.Add(usuarioPassivo);
-            db.SaveChanges();
+            try
+            {
+                var id = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
+                UsuarioAtivo us = db.UsuariosAtivos.SingleOrDefault(a => a.Id == id);
+                usuarioPassivo.UsuarioAtivo = us;
+                db.UsuariosPassivos.Add(usuarioPassivo);
+                db.SaveChanges();
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+             }
         }
     }
 }

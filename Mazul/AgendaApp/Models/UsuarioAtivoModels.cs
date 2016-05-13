@@ -30,18 +30,24 @@ namespace AgendaApp.Models
         public bool inserirUsuarioAtivo(UsuarioAtivo usuarioAtivo)
         {
             bool valida = true;
-            if (ValidarSenha(usuarioAtivo.Senha))
+            try
             {
-                var salt = Crypto.GenerateSalt();
-                usuarioAtivo.Senha = Hash.CriarSenhaHash(usuarioAtivo.Senha, salt);
-                usuarioAtivo.Salt = salt;
+                if (ValidarSenha(usuarioAtivo.Senha))
+                {
+                    var salt = Crypto.GenerateSalt();
+                    usuarioAtivo.Senha = Hash.CriarSenhaHash(usuarioAtivo.Senha, salt);
+                    usuarioAtivo.Salt = salt;
 
-                db.UsuariosAtivos.Add(usuarioAtivo);
-                db.SaveChanges();
+                    db.UsuariosAtivos.Add(usuarioAtivo);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    valida = false;
+                }
             }
-            else
-            {
-                valida = false;
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
             }
 
             return valida;
@@ -56,7 +62,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception(ex.Message);
             }
         }
 
@@ -69,7 +75,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception(ex.Message);
             }
         }
 
@@ -85,7 +91,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception(ex.Message);
             }
         }
 
