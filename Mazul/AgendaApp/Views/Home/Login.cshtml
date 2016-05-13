@@ -6,10 +6,6 @@
     }
     <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
     <title>Login</title>
-
-    <script>
-        alerta('@TempData["Sucesso"]', 'sucesso');
-    </script>
 </head>
 
 <body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
@@ -50,7 +46,6 @@
                                 @*@Html.ValidationMessageFor(model => model.Senha)*@
                             </div>
                         </div>
-                        @*Materialize.toast(@TempData["SucessoInserir"]  , 4000)*@  
                         @Html.ValidationSummary(true)
                         @Html.ValidationMessage("ErroLoginErroLogin")
                     </div>

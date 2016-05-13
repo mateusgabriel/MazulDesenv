@@ -30,24 +30,18 @@ namespace AgendaApp.Models
         public bool inserirUsuarioAtivo(UsuarioAtivo usuarioAtivo)
         {
             bool valida = true;
-            try
+            if (ValidarSenha(usuarioAtivo.Senha))
             {
-                if (ValidarSenha(usuarioAtivo.Senha))
-                {
-                    var salt = Crypto.GenerateSalt();
-                    usuarioAtivo.Senha = Hash.CriarSenhaHash(usuarioAtivo.Senha, salt);
-                    usuarioAtivo.Salt = salt;
+                var salt = Crypto.GenerateSalt();
+                usuarioAtivo.Senha = Hash.CriarSenhaHash(usuarioAtivo.Senha, salt);
+                usuarioAtivo.Salt = salt;
 
-                    db.UsuariosAtivos.Add(usuarioAtivo);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    valida = false;
-                }
+                db.UsuariosAtivos.Add(usuarioAtivo);
+                db.SaveChanges();
             }
-            catch (Exception ex) {
-               //
+            else
+            {
+                valida = false;
             }
 
             return valida;
@@ -62,7 +56,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-               //
+                //
             }
         }
 
@@ -91,7 +85,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-               //
+                //
             }
         }
 
@@ -100,7 +94,7 @@ namespace AgendaApp.Models
             if (senha == null) return false;
 
             const int MIN_LENGTH = 7;
-            const int MAX_LENGTH = 25;
+            const int MAX_LENGTH = 15;
             string specialCharacters = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
             char[] specialArray = specialCharacters.ToCharArray();
 

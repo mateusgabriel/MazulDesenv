@@ -119,7 +119,6 @@ namespace AgendaApp.Controllers
                     }
                 }
 
-                TempData["Sucesso"] = "Criado";
                 models.inserirEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -181,7 +180,7 @@ namespace AgendaApp.Controllers
                 evento.UsuarioAtivo = models.retornarUsuarioLogado();
                 if (contatos != null)
                 {
-                   var usuariosPassivos = new List<UsuarioPassivo>();
+                    var usuariosPassivos = new List<UsuarioPassivo>();
                     List<string> contatosEmail = new List<string>();
                     int i = 0;
 
@@ -192,39 +191,30 @@ namespace AgendaApp.Controllers
                         usuariosPassivos.Add(contato);
                     }
                     evento.UsuariosPassivos = usuariosPassivos;
-                    
-                    try
+
+                    foreach (var email in contatosEmail)
                     {
-                        foreach (var email in contatosEmail)
-                        {                            
-                            var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
-                            var usuarioEmail = evento.UsuarioAtivo.Email;
-                            string body = @"<html><body>
+                        var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
+                        var usuarioEmail = evento.UsuarioAtivo.Email;
+                        string body = @"<html><body>
                                             <p>Olá! <br/><br/>" + usuarioNome + " remarcou " + evento.Nome + " com você no(a) " + evento.Local +
-                                                               " para o dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
-                                                ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente,</p></body></html>";
+                                                           " para o dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
+                                            ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente,</p></body></html>";
 
-                            MailMessage mail = new MailMessage(usuarioEmail, email, evento.Nome, body);
-                            mail.From = new MailAddress(usuarioEmail, usuarioNome);
-                            mail.IsBodyHtml = true; // necessary if you're using html email
+                        MailMessage mail = new MailMessage(usuarioEmail, email, evento.Nome, body);
+                        mail.From = new MailAddress(usuarioEmail, usuarioNome);
+                        mail.IsBodyHtml = true; // necessary if you're using html email
 
-                            NetworkCredential credential = new NetworkCredential("mazulapp@gmail.com", "Asdzxc123$");
-                            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = credential;
-                            smtp.Send(mail);
-                            i++;
-                        }
-                    }  catch (SmtpException e)
-                        {
-                            TempData["ErrorMail"] = "Houve um problema e o contato não foi notificado sobre este evento. Fique tranquilo, já estamos solucionando o problema.";
-                            //ModelState.AddModelError("ErrorMail", "Ocorreu um erro ao enviar email para contato. Fique tranquilo, já estamos solucionando o problema." + e);
-                        }
-
+                        NetworkCredential credential = new NetworkCredential("mazulapp@gmail.com", "Asdzxc123$");
+                        SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                        smtp.EnableSsl = true;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = credential;
+                        smtp.Send(mail);
+                        i++;
+                    }
                 }
 
-                TempData["Sucesso"] = "Salvo";
                 models.editarEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -274,8 +264,6 @@ namespace AgendaApp.Controllers
                 Evento evento = models.consultarEventosPorId((int)eventoIds[0]);
                 eventos.Add(evento);
             }
-
-            TempData["Sucesso"] = "Excluído";
             return View(eventos);
         }
 
