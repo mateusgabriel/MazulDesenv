@@ -47,7 +47,7 @@ namespace AgendaApp.Models
                 }
             }
             catch (Exception ex) {
-                throw new Exception(ex.Message);
+               //
             }
 
             return valida;
@@ -62,7 +62,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+               //
             }
         }
 
@@ -75,7 +75,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                //
             }
         }
 
@@ -91,7 +91,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+               //
             }
         }
 
@@ -100,7 +100,7 @@ namespace AgendaApp.Models
             if (senha == null) return false;
 
             const int MIN_LENGTH = 7;
-            const int MAX_LENGTH = 15;
+            const int MAX_LENGTH = 25;
             string specialCharacters = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
             char[] specialArray = specialCharacters.ToCharArray();
 

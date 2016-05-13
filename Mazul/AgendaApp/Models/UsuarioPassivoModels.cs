@@ -37,7 +37,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                //
             }
         }
 
@@ -50,7 +50,7 @@ namespace AgendaApp.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+               //
             }
         }
 
@@ -65,7 +65,7 @@ namespace AgendaApp.Models
                 db.SaveChanges();
             }
             catch (Exception ex) {
-                throw new Exception(ex.Message);
+               //
              }
         }
     }
