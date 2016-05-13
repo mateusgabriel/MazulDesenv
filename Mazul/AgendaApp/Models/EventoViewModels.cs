@@ -33,6 +33,8 @@ namespace AgendaApp.Models
 
         public ICollection<UsuarioPassivoViewModels> UsuariosPassivos { get; set; }
 
+        #region Eventos Diários
+
         public List<Evento> EventosDiarios { get; set; }
 
         public List<Evento> EventosDomingo { get; set; }
@@ -49,6 +51,10 @@ namespace AgendaApp.Models
 
         public List<Evento> EventosSabado { get; set; }
 
+        #endregion
+
+        #region Eventos Mensais
+
         public List<Evento> EventosMensais { get; set; }
 
         public List<Evento> EventosPrimeiroDomingo { get; set; }
@@ -61,6 +67,7 @@ namespace AgendaApp.Models
 
         public List<Evento> EventosQuintoDomingo { get; set; }
 
+
         public List<Evento> EventosPrimeiraSegunda { get; set; }
 
         public List<Evento> EventosSegundaSegunda { get; set; }
@@ -71,7 +78,42 @@ namespace AgendaApp.Models
 
         public List<Evento> EventosQuintaSegunda { get; set; }
 
-        public int SemanaDoMes { get; set; }
+
+        public List<Evento> EventosPrimeiraTerca { get; set; }
+
+        public List<Evento> EventosSegundaTerca { get; set; }
+
+        public List<Evento> EventosTerceiraTerca { get; set; }
+
+        public List<Evento> EventosQuartaTerca { get; set; }
+
+        public List<Evento> EventosQuintaTerca { get; set; }
+
+
+        public List<Evento> EventosPrimeiraQuarta { get; set; }
+
+        public List<Evento> EventosSegundaQuarta { get; set; }
+
+        public List<Evento> EventosTerceiraQuarta { get; set; }
+
+        public List<Evento> EventosQuartaQuarta { get; set; }
+
+        public List<Evento> EventosQuintaQuarta { get; set; }
+
+
+        public List<Evento> EventosPrimeiraQuinta { get; set; }
+
+        public List<Evento> EventosSegundaQuinta { get; set; }
+
+        public List<Evento> EventosTerceiraQuinta { get; set; }
+
+        public List<Evento> EventosQuartaQuinta { get; set; }
+
+        public List<Evento> EventosQuintaQuinta { get; set; }
+
+        #endregion
+
+        #region Quantidade Dias Mensais
 
         public List<DateTime> QuantidadeDomingosMes { get; set; }
 
@@ -87,7 +129,9 @@ namespace AgendaApp.Models
 
         public List<DateTime> QuantidadeSabadosMes { get; set; }
 
+        #endregion
 
+        public int SemanaDoMes { get; set; }
 
         private List<string> _itens;
 
