@@ -7,12 +7,6 @@
     }
     <script type="text/javascript" src="~/Scripts/evento.js"></script>
     <title>Index</title>
-     
-    <script>
-        alerta('@TempData["ErrorMail"]', 'erro');
-        alerta('@TempData["Sucesso"]', 'sucesso');
-    </script>
-    
 </head>
 
 <body ng-app="eventoApp" ng-controller="EventoController">
@@ -21,6 +15,7 @@
         <div class="col s8 offset-s4 m12 l12">
             <h4>Eventos</h4>
         </div>
+        @Html.ValidationMessage("ErrorMail")
     </div>
 
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">

@@ -64,7 +64,6 @@ namespace AgendaApp.Controllers
                 }
 
                 models.inserirUsuarioPassivo(usuarioPassivo);
-                TempData["Sucesso"] = "Adicionado"; 
                 return RedirectToAction("Index");
             }
             else
@@ -97,14 +96,7 @@ namespace AgendaApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                try
-                {
-                    models.editarUsuarioPassivo(usuarioPassivo);
-                }
-                catch (Exception e) {
-                    TempData["Erro"] = "Erro ao editar";
-                }
-                TempData["Sucesso"] = "Salvo";
+                models.editarUsuarioPassivo(usuarioPassivo);
                 return RedirectToAction("Index");
             }
             return View();
@@ -151,7 +143,6 @@ namespace AgendaApp.Controllers
                 UsuarioPassivo contato = models.consultaUsuariosPassivosPorId((int)contatoIds[0]);
                 contatos.Add(contato);
             }
-            TempData["Sucesso"] = "Excluído";
             return View(contatos);
         }
 
