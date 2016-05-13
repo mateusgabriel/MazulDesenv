@@ -54,4 +54,13 @@ font-size: 1.1em;
 
 .validation-summary-valid {
 display: none;
-}  
+}
+
+.toast > .field-validation-error  {
+    color: #ffffff !important;
+}
+
+.toast {
+    max-width: 540px !important;
+     word-wrap:normal;
+}
