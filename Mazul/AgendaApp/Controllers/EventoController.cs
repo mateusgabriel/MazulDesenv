@@ -118,6 +118,7 @@ namespace AgendaApp.Controllers
                     }
                 }
 
+                TempData["Sucesso"] = "Criado";
                 models.inserirEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -179,7 +180,7 @@ namespace AgendaApp.Controllers
                 evento.UsuarioAtivo = models.retornarUsuarioLogado();
                 if (contatos != null)
                 {
-                    var usuariosPassivos = new List<UsuarioPassivo>();
+                   var usuariosPassivos = new List<UsuarioPassivo>();
                     List<string> contatosEmail = new List<string>();
                     int i = 0;
 
@@ -190,12 +191,11 @@ namespace AgendaApp.Controllers
                         usuariosPassivos.Add(contato);
                     }
                     evento.UsuariosPassivos = usuariosPassivos;
-
+                    
                     try
                     {
                         foreach (var email in contatosEmail)
-                        {
-                            throw new SmtpException();
+                        {                            
                             var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
                             var usuarioEmail = evento.UsuarioAtivo.Email;
                             string body = @"<html><body>
@@ -223,6 +223,7 @@ namespace AgendaApp.Controllers
 
                 }
 
+                TempData["Sucesso"] = "Salvo";
                 models.editarEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -272,6 +273,8 @@ namespace AgendaApp.Controllers
                 Evento evento = models.consultarEventosPorId((int)eventoIds[0]);
                 eventos.Add(evento);
             }
+
+            TempData["Sucesso"] = "Excluído";
             return View(eventos);
         }
 

@@ -63,7 +63,7 @@ namespace AgendaApp.Controllers
                   }
                   else
                   {
-                    TempData["SucessoInserir"] = "Cadastrado com sucesso. Entre em sua conta!";
+                    TempData["Sucesso"] = "Bem vindo! Entre com seu login e senha e ...";
                     return RedirectToAction("Login","Home");
                   }
             }
@@ -92,7 +92,14 @@ namespace AgendaApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                models.editarUsuarioAtivo(usuarioAtivo);
+                try
+                {
+                    models.editarUsuarioAtivo(usuarioAtivo);
+                }
+                catch (Exception e) {
+                    TempData["Erro"] = "Erro ao editar";
+                }
+                TempData["Sucesso"] = "Salvo";
                 return RedirectToAction("Index");
             }
             return View();
