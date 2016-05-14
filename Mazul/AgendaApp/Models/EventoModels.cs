@@ -233,7 +233,7 @@ namespace AgendaApp.Models
 
         public List<DateTime> consultarDiaNasSemanasDoMes(int mes, int ano, DayOfWeek dia)
         {
-            mes = 6;
+            //mes = 6;
             var diaNasSemanasDoMes = new List<DateTime>();
             var primeiroDiadoMes = new DateTime(ano, mes, 1);
             DateTime diaAtual = primeiroDiadoMes;

@@ -334,17 +334,16 @@
                     
                     @foreach (var item in Model.QuantidadeDomingosMes)
                     {
-                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any())
                         {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
-                                    </span>*@
+                                    </span>
                                 </div>
                             </li>
-                            existeCardInvisivel = false;
-                        }
+                        }*@
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -352,13 +351,12 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <span class="new badge">@Model.EventosPrimeiroDomingo.Count() Eventos</span>
+                                        <span class="new badge">@Model.EventosMensais.Count </span>
                                     </span>
                                 </span>
                             </div>
                         </li>
                     }
-                    @{existeCardInvisivel = true; }
                 </ul>
             </div>
             <div class="col s12 lhalf">
@@ -370,17 +368,16 @@
                     </li>
                     @foreach (var item in Model.QuantidadeSegundasMes)
                     {
-                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any())
                         {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
-                                    </span>*@
+                                    </span>
                                 </div>
                             </li>
-                            existeCardInvisivel = false;
-                        }
+                        }*@
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -394,7 +391,6 @@
                             </div>
                         </li>
                     }
-                    @{existeCardInvisivel = true; }
                 </ul>
             </div>
             <div class="col s12 lhalf">
@@ -406,17 +402,16 @@
                     </li>
                     @foreach (var item in Model.QuantidadeTercasMes)
                     {
-                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any())
                         {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
-                                        </span>*@
+                                        </span>
                                 </div>
                             </li>
-                            existeCardInvisivel = false;
-                        }
+                        }*@
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -442,17 +437,16 @@
                     </li>
                     @foreach (var item in Model.QuantidadeQuartasMes)
                     {
-                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                        @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        if (!existePrimeiroDomingo.Any())
                         {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
-                                        </span>*@
+                                        </span>
                                 </div>
                             </li>
-                            existeCardInvisivel = false;
-                        }
+                        }*@
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -478,17 +472,17 @@
                     </li>
                     @foreach (var item in Model.QuantidadeQuintasMes)
                     {
-                        var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
+                        @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
                         if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
                         {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
-                                        </span>*@
+                                        </span>
                                 </div>
                             </li>
                             existeCardInvisivel = false;
-                        }
+                        }*@
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
