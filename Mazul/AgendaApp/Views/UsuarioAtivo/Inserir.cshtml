@@ -5,6 +5,20 @@
         ViewBag.Title = "Inserir";
     }
     <title>Inserir</title>
+
+    @if (ViewData.ModelState["FieldsError"] != null && ViewData.ModelState["FieldsError"].Errors.Any())
+    {
+       <script>
+            alerta('@Html.ValidationMessage("FieldsError")', 'erro');
+        </script>
+     }
+    
+    @if(ViewData.ModelState["PasswordError"] != null && ViewData.ModelState["PasswordError"].Errors.Any())
+    {
+        <script>
+            alerta('@Html.ValidationMessage("PasswordError")', 'erro');
+        </script>
+    }  
 </head>
 
 <body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
@@ -12,13 +26,10 @@
     {
         @Html.AntiForgeryToken()
         <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
-        <h3>Inserir</h3>
+        <h3>Registre-se</h3>
 
         <form name="form" class="css-form" method="post" action="@Url.Action("Inserir", "UsuarioAtivo")">
-            <div class="row">
-                @Html.ValidationMessage("FieldsError")
-            </div>
-            <div class="row">
+              <div class="row">
                 <div class="input-field col s6">
                     <i class=" material-icons prefix"> account_circle</i>
                     @*<input id="first_name" name="first_name" ng-model="usuarioAtivo.Nome" type="text" required />*@
@@ -112,9 +123,6 @@
                             <span class="msg-error" ng-show="form.confirm_password.$error.pwmatch">Passwords don't match.</span>
                         </div>*@
                 </div>
-            </div>
-            <div style="padding-left:15px" class="row">
-                @Html.ValidationMessage("PasswordError")
             </div>
 
             <div class="row">
