@@ -1,10 +1,14 @@
-﻿@model IEnumerable<AgendaApp.Entidades.UsuarioAtivo>
+﻿@odel IEnumerable<AgendaApp.Entidades.UsuarioAtivo>
 <head>
     @{
         ViewBag.Title = "Index";
     }
     <script type="text/javascript" src="~/Scripts/usuarioAtivo.js"></script>
     <title>Listar</title>
+    <script>
+        alerta('@TempData["ErrorMail"]', 'erro');
+        alerta('@TempData["Sucesso"]', 'sucesso');
+    </script>
 </head>
 
 <body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
