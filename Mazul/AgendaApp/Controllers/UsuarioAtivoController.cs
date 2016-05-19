@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -216,6 +218,74 @@ namespace AgendaApp.Controllers
             {
                 return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
             }
+        }
+
+
+        // GET: UsuarioAtivo/Index
+        [HttpGet]
+        public ActionResult Index()
+        {
+            if (Session["UsuarioAtivoId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var usuariosAtivos = models.consultarUsuariosAtivos();
+            return View(usuariosAtivos);
+        }
+
+        // GET: UsuarioAtivo/Recuperar Senha
+        [HttpGet]
+        public ActionResult recuperarSenha()
+        {
+            return View();
+        }
+
+        // POST: UsuarioAtivo/Inserir
+        [HttpPost]
+        public ActionResult recuperarSenha(String login)
+        {
+            if (ModelState.IsValid)
+            {
+                UsuarioAtivo usuario = models.consultarUsuarioAtivoPorLogin(login);
+
+                if (usuario != null) {
+                    string hash = usuario.Email + DateTime.Today.ToLongDateString() + "mazul";
+                    hash = converterParaMD5(hash);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("FieldsError", "Preencha os campos corretamente.");
+            }
+            return View();
+        }
+
+        private string converterParaMD5(string input)
+
+        {
+
+            // step 1, calculate MD5 hash from input
+
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+
+            {
+
+                sb.Append(hash[i].ToString("X2"));
+
+            }
+
+            return sb.ToString();
+
         }
     }
 }

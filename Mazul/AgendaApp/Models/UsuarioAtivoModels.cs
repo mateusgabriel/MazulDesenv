@@ -122,5 +122,25 @@ namespace AgendaApp.Models
                         ;
             return isValid;
         }
+
+        public UsuarioAtivo consultarUsuarioAtivoPorLogin(String login) {
+            var usuarioAtivo = new UsuarioAtivo();
+
+            try
+            {
+                usuarioAtivo = db.UsuariosAtivos.Where(a => a.Email == login).FirstOrDefault();
+
+                if (usuarioAtivo != null)
+                {
+                   return usuarioAtivo;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return usuarioAtivo;
+        }
+    }
     }
 }
