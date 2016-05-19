@@ -1,5 +1,6 @@
 ﻿var usuarioAtivoApp = angular.module("usuarioAtivoApp", ["usuarioAtivoApp.directives"]);
 var itemId;
+$("#telefone").mask("(99) 9999?9-9999");
 
 usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $window) {
     $scope.master = {};
