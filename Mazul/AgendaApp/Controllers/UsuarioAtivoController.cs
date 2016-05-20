@@ -223,27 +223,15 @@ namespace AgendaApp.Controllers
         }
 
 
-        // GET: UsuarioAtivo/Index
-        [HttpGet]
-        public ActionResult Index()
-        {
-            if (Session["UsuarioAtivoId"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            var usuariosAtivos = models.consultarUsuariosAtivos();
-            return View(usuariosAtivos);
-        }
-
         // GET: UsuarioAtivo/Redefinir Senha
         [HttpGet]
         public ActionResult RedefinirSenha()
         {
 
-            Uri someUri = Page.Request.Url;
-            string urlstr = string.Format(
-                "AbsoluteUri: {0}<br/> Scheme: {1}<br/> Host: {2}<br/> Query: {3} ",
-                someUri.AbsoluteUri, someUri.Scheme, someUri.Host, someUri.Query);
+            String someUri = Request.Url.ToString();
+            //string urlstr = string.Format(
+            //    "AbsoluteUri: {0}<br/> Scheme: {1}<br/> Host: {2}<br/> Query: {3} ",
+            //    someUri.AbsoluteUri, someUri.Scheme, someUri.Host, someUri.Query);
 
               return RedirectToAction("Login", "Home");
         }
@@ -258,21 +246,20 @@ namespace AgendaApp.Controllers
 
                 if (usuarioAtivo != null)
                 {
-                    String hash = usuarioAtivo.Email + DateTime.Today.ToLongDateString() + "mazulrecuperaçãodesenha";
-                    hash = converterParaMD5(hash);
-                    enviarEmail(usuarioAtivo, hash);
-                    TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu email.";
+                    try {
+                        String hash = usuarioAtivo.Email + DateTime.Today.ToShortDateString() + "mazulrecuperaçãodesenha";
+                        hash = converterParaMD5(hash);
+                        enviarEmail(usuarioAtivo, hash);
+                        TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu email.";
+                    } catch (SmtpException e) {
+                        ModelState.AddModelError("Erro", e.Message);
+                    }
                 }
                 else {
                     ModelState.AddModelError("Erro", "Login incorreto.");
                 }
             }
-            else
-            {
-                ModelState.AddModelError("Erro", "Preencha os campos corretamente.");
-            }
-
-            
+                       
             return RedirectToAction("Login", "Home");
         }
 
@@ -325,7 +312,8 @@ namespace AgendaApp.Controllers
             }
             catch (SmtpException e)
             {
-                TempData["Error"] = "Houve um problema e o contato não foi notificado sobre este evento. Fique tranquilo, já estamos solucionando o problema.";
+                Console.WriteLine(e);
+                throw new SmtpException("Houve um problema e o contato não foi notificado sobre este evento.Fique tranquilo, já estamos solucionando o problema.");
             }
         }
     }

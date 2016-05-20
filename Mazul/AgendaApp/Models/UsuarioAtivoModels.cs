@@ -142,5 +142,5 @@ namespace AgendaApp.Models
             return usuarioAtivo;
         }
     }
-    }
+    
 }
