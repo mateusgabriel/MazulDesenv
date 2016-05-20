@@ -47,6 +47,7 @@
                                 <label for="Senha">Senha</label>
                                 @Html.PasswordFor(model => model.Senha, new { required = "required" })
                                 @*@Html.ValidationMessageFor(model => model.Senha)*@
+                                <a class="modal-trigger" href="#recuperarSenha">Esqueceu sua senha?</a>
                             </div>
                         </div>
                         @Html.ValidationSummary(true)
@@ -64,6 +65,27 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+         <!-- Modal -->
+        <div id="recuperarSenha" class="modal">
+            <div class="modal-content">
+                <h4>Esqueceu sua senha?</h4>
+                <form name="form" class="css-form" method="post" action="@Url.Action("RecuperarSenha", "UsuarioAtivo")">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="Login">Informe seu login</label>
+                            @Html.TextBox("Login", new { required = "required" })
+                        </div>
+                        <button class="col s6 m6 waves-effect waves-light light-blue darken-3" type="submit" name="Recuperar Senha">
+                            Recuperar Senha
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
     }
