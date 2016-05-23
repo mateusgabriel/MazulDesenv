@@ -123,7 +123,8 @@ namespace AgendaApp.Models
             return isValid;
         }
 
-        public UsuarioAtivo consultarUsuarioAtivoPorLogin(String login) {
+        public UsuarioAtivo consultarUsuarioAtivoPorLogin(string login)
+        {
             var usuarioAtivo = new UsuarioAtivo();
 
             try
@@ -132,7 +133,27 @@ namespace AgendaApp.Models
 
                 if (usuarioAtivo != null)
                 {
-                   return usuarioAtivo;
+                    return usuarioAtivo;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return usuarioAtivo;
+        }
+
+        public UsuarioAtivo consultarUsuarioAtivoPorSalt(string salt) 
+        {
+            var usuarioAtivo = new UsuarioAtivo();
+
+            try
+            {
+                usuarioAtivo = db.UsuariosAtivos.Where(a => a.Salt == salt).FirstOrDefault();
+
+                if (usuarioAtivo != null)
+                {
+                    return usuarioAtivo;
                 }
             }
             catch (Exception ex)

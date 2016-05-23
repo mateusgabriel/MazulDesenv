@@ -10,8 +10,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
+using AgendaApp.Security;
 using System.Web.UI;
+using System.Web.Helpers;
 
 namespace AgendaApp.Controllers
 {
@@ -82,22 +83,46 @@ namespace AgendaApp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
-            UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId((int)id);
-            return View(usuarioAtivo);
+            var usuarioAtivoViewModel = new UsuarioAtivoViewModels();
+            var usuarioAtivo = models.consultarUsuariosAtivosPorId(id.Value);
+
+            usuarioAtivoViewModel.Id = usuarioAtivo.Id;
+            usuarioAtivoViewModel.Nome = usuarioAtivo.Nome;
+            usuarioAtivoViewModel.Sobrenome = usuarioAtivo.Sobrenome;
+            usuarioAtivoViewModel.Telefone = usuarioAtivo.Telefone;
+            usuarioAtivoViewModel.Endereco = usuarioAtivo.Endereco;
+            usuarioAtivoViewModel.Email = usuarioAtivo.Email;
+            usuarioAtivoViewModel.Eventos = usuarioAtivo.Eventos;
+            usuarioAtivoViewModel.UsuariosPassivos = usuarioAtivo.UsuariosPassivos;
+
+            if (usuarioAtivo.Sexo == 1)
+                usuarioAtivoViewModel.Sexo = "Masculino";
+            else
+                usuarioAtivoViewModel.Sexo = "Feminino";
+
+            return View(usuarioAtivoViewModel);
         }
 
         // POST: UsuarioAtivo/Editar
         [HttpPost]
-        public ActionResult Editar(UsuarioAtivo usuarioAtivo)
+        public ActionResult Editar(UsuarioAtivoViewModels usuarioAtivoViewModels)
         {
-            if (Session["UsuarioAtivoId"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
+           
             if (ModelState.IsValid)
             {
                 try
                 {
+                    UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
+
+                    usuarioAtivo.Id = usuarioAtivoViewModels.Id;
+                    usuarioAtivo.Nome = usuarioAtivoViewModels.Nome;
+                    usuarioAtivo.Sobrenome = usuarioAtivoViewModels.Sobrenome;
+                    usuarioAtivo.Endereco = usuarioAtivoViewModels.Endereco;
+                    usuarioAtivo.Telefone = usuarioAtivoViewModels.Telefone;
+                    usuarioAtivo.Email = usuarioAtivoViewModels.Email;
+                    usuarioAtivo.Senha = usuarioAtivoViewModels.Senha;
+
+
                     models.editarUsuarioAtivo(usuarioAtivo);
                     TempData["Sucesso"] = "Salvo";
                     return RedirectToAction("Index");
@@ -105,6 +130,10 @@ namespace AgendaApp.Controllers
                 catch(Exception e) {
                     TempData["Erro"] = "Erro ao editar";
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("FieldsError", "Preencha os campos corretamente.");
             }
 
             return View();
@@ -227,13 +256,21 @@ namespace AgendaApp.Controllers
         [HttpGet]
         public ActionResult RedefinirSenha()
         {
+            Uri uri = new Uri(Request.Url.ToString());
+            var salt = uri.Segments[3];
 
-            String someUri = Request.Url.ToString();
-            //string urlstr = string.Format(
-            //    "AbsoluteUri: {0}<br/> Scheme: {1}<br/> Host: {2}<br/> Query: {3} ",
-            //    someUri.AbsoluteUri, someUri.Scheme, someUri.Host, someUri.Query);
+            var usuarioAtivo = models.consultarUsuarioAtivoPorSalt(salt);
 
-              return RedirectToAction("Login", "Home");
+            if (usuarioAtivo != null)
+            {
+                return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
+            }
+            else {
+                ModelState.AddModelError("Erro", "Link expirado.");
+            }
+            
+
+            return RedirectToAction("Login", "Home");
         }
 
         // POST: UsuarioAtivo/Inserir
@@ -247,59 +284,31 @@ namespace AgendaApp.Controllers
                 if (usuarioAtivo != null)
                 {
                     try {
-                        String hash = usuarioAtivo.Email + DateTime.Today.ToShortDateString() + "mazulrecuperaçãodesenha";
-                        hash = converterParaMD5(hash);
-                        enviarEmail(usuarioAtivo, hash);
+                        var salt = Crypto.GenerateSalt();
+                        usuarioAtivo.Salt = salt;
+                        models.editarUsuarioAtivo(usuarioAtivo);
+
+                        enviarEmail(usuarioAtivo, salt);
                         TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu email.";
                     } catch (SmtpException e) {
                         ModelState.AddModelError("Erro", e.Message);
                     }
                 }
                 else {
-                    ModelState.AddModelError("Erro", "Login incorreto.");
+                    ModelState.AddModelError("Erro", "Usuário não encontrado.");
                 }
             }
                        
             return RedirectToAction("Login", "Home");
         }
 
-        private string converterParaMD5(string input)
-
-        {
-
-            // step 1, calculate MD5 hash from input
-
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-
-            {
-
-                sb.Append(hash[i].ToString("X2"));
-
-            }
-
-            return sb.ToString();
-
-        }
-
-        private void enviarEmail(UsuarioAtivo usuarioAtivo, String hash) {
-            var usuarioNome = usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome;
-            var usuarioEmail = usuarioAtivo.Email;
+         private void enviarEmail(UsuarioAtivo usuarioAtivo, string salt) {
             string body = @"<html><body>
-                                          <p>Olá! <br /><br />" + usuarioNome + ", para redefinir sua senha click no link abaixo:</p> <p>http://localhost:6272/redefinirsenha/" + hash + "</p> <p>Atenciosamente,</p></body></html>";
+                                          <p>Olá! <br /><br />" + usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome + ", para redefinir sua senha click no link abaixo:</p> <p>http://localhost:6272/usuarioAtivo/redefinirsenha/" + salt + "</p> <p>Atenciosamente,</p></body></html>";
 
             try
             {
-                MailMessage mail = new MailMessage(usuarioEmail, usuarioEmail, "Redefinição de senha", body);
+                MailMessage mail = new MailMessage("williamgabriel04@gmail.com", "williamgabriel04@gmail.com", "Redefinição de senha", body);
                 mail.From = new MailAddress("mazulapp@gmail.com", "Mazul");
                 mail.IsBodyHtml = true; // necessary if you're using html email
 
