@@ -1,0 +1,56 @@
+﻿@model AgendaApp.Models.RedefinirSenhaViewModels
+<head>
+    @{
+        ViewBag.Title = "RedefinirSenha";
+    }
+    <title>Editar</title>
+    @if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
+    {
+        <script>
+            alerta('@Html.ValidationMessage("Error")', 'erro');
+        </script>
+    }
+</head>
+<body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Redefinição de Senha</h4>
+        <br /><br />
+        <form class="col s12 m12 l12 ">
+            <div class="center">
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <label for="Senha">Senha</label>
+                        @Html.PasswordFor(model => model.Senha, new { required = "required" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <label for="ConfirmaSenha">Confirmar Senha</label>
+                        @Html.PasswordFor(model => model.ConfirmarSenha, new { required = "required" })
+                        @Html.ValidationMessageFor(model => model.ConfirmarSenha)
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.UsuarioId, new { required = "required" })
+
+                <div class="row">
+                    <br /><br />
+                    <a class="btn  s12 m6 l6 waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioAtivo")">
+                        <i class="material-icons left">reply</i>
+                        Voltar
+                    </a>
+                    <button class="btn s12 m6 l6 waves-effect waves-light light-blue darken-3" type="submit" name="RedefinirSenha">
+                        Salvar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+</body>
