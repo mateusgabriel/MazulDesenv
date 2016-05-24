@@ -263,7 +263,13 @@ namespace AgendaApp.Controllers
 
             if (usuarioAtivo != null)
             {
-                return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
+
+                var viewModels = new RedefinirSenhaViewModels();
+
+                viewModels.UsuarioId = usuarioAtivo.Id;
+
+                return View(viewModels);
+                //  return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
             }
             else {
                 ModelState.AddModelError("Erro", "Link expirado.");
@@ -273,7 +279,38 @@ namespace AgendaApp.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        // POST: UsuarioAtivo/Inserir
+        // POST: UsuarioAtivo/Redefeinir Senha
+        [HttpPost]
+        public ActionResult RedefinirSenha(RedefinirSenhaViewModels viewModels)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId(viewModels.UsuarioId);
+
+                    usuarioAtivo.Senha = viewModels.Senha;
+
+                    models.editarUsuarioAtivo(usuarioAtivo);
+
+                    TempData["Sucesso"] = "Salvo";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    TempData["Erro"] = "Erro ao editar";
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("FieldsError", "Preencha os campos corretamente.");
+            }
+
+            return View();
+        }
+
+        // POST: UsuarioAtivo/Recurperar Senha
         [HttpPost]
         public ActionResult RecuperarSenha(String login)
         {
