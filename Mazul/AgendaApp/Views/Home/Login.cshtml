@@ -35,19 +35,17 @@
                                 <i class="material-icons prefix">perm_identity</i>
                                 <label for="Email">Email</label>
                                 @Html.TextBoxFor(model => model.Email, new { required = "required", type = "email" })
-                                @*@Html.ValidationMessageFor(model => model.Email)*@
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s11">
                                 <i class="material-icons prefix">lock_outline</i>
                                 <label for="Senha">Senha</label>
-                                @Html.PasswordFor(model => model.Senha, new { required = "required" })
-                                @*@Html.ValidationMessageFor(model => model.Senha)*@
+                                @Html.PasswordFor(model => model.Senha, new { required = "required", type = "password" })
                             </div>
                         </div>
                         @Html.ValidationSummary(true)
-                        @Html.ValidationMessage("ErroLoginErroLogin")
+                        @Html.ValidationMessage("ErroLogin")
                     </div>
                     <div class="card-action">
                         <div class="row ">

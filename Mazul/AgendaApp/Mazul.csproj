@@ -253,6 +253,8 @@
     <Content Include="font\roboto\Roboto-Thin.woff" />
     <Content Include="font\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="img\nave_decolando.gif" />
+    <Content Include="img\nave_decolando4.gif" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\clockpicker.js" />
     <Content Include="Scripts\evento.js" />

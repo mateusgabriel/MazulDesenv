@@ -351,7 +351,36 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        <span class="new badge">@Model.EventosMensais.Count </span>
+                                        @if (Model.EventosPrimeiroDomingo.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosPrimeiroDomingo.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosSegundoDomingo.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosSegundoDomingo.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosTerceiroDomingo.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosTerceiroDomingo.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosQuartoDomingo.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosQuartoDomingo.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosQuintoDomingo.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosQuintoDomingo.Count
+                                            </span>
+                                        }
                                     </span>
                                 </span>
                             </div>
@@ -367,10 +396,10 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeSegundasMes)
-                    {
+                                        {
                         @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any())
-                        {
+                                                    if (!existePrimeiroDomingo.Any())
+                                                    {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
@@ -385,7 +414,36 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        
+                                        @if (Model.EventosPrimeiraSegunda.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosPrimeiraSegunda.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosSegundaSegunda.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosSegundaSegunda.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosTerceiraSegunda.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosTerceiraSegunda.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosQuartaSegunda.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosQuartaSegunda.Count
+                                            </span>
+                                        }
+                                        else if (Model.EventosQuintaSegunda.Any(e => e.DataEvento == item.Date))
+                                        {
+                                            <span class="new badge red lighten-2">
+                                                @Model.EventosQuintaSegunda.Count
+                                            </span>
+                                        }
                                     </span>
                                 </span>
                             </div>
@@ -401,10 +459,10 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeTercasMes)
-                    {
+                                        {
                         @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any())
-                        {
+                                            if (!existePrimeiroDomingo.Any())
+                                            {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
@@ -419,8 +477,38 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>*@
+                                        <span style="margin-top:5px; padding-left:10px" class="right">
+                                            @if (Model.EventosPrimeiraTerca.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiraTerca.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosSegundaTerca.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundaTerca.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosTerceiraTerca.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiraTerca.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuartaTerca.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartaTerca.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuintaTerca.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintaTerca.Count
+                                                </span>
+                                            }
+                                        </span>
                                     </span>
                                 </span>
                             </div>
@@ -436,10 +524,10 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeQuartasMes)
-                    {
+                                        {
                         @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any())
-                        {
+                                            if (!existePrimeiroDomingo.Any())
+                                            {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
                                     @*<span class="card-title grey-text text-darken-4">
@@ -454,8 +542,38 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>*@
+                                        <span style="margin-top:5px; padding-left:10px" class="right">
+                                            @if (Model.EventosPrimeiraQuarta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiraQuarta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosSegundaQuarta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundaQuarta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosTerceiraQuarta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiraQuarta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuartaQuarta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartaQuarta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuintaQuarta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintaQuarta.Count
+                                                </span>
+                                            }
+                                        </span>
                                     </span>
                                 </span>
                             </div>
@@ -471,13 +589,13 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeQuintasMes)
-                    {
+                                        {
                         @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                        if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
-                        {
+                                            if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                                            {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
-                                    @*<span class="card-title grey-text text-darken-4">
+                                    <span class="card-title grey-text text-darken-4">
                                         </span>
                                 </div>
                             </li>
@@ -490,8 +608,38 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>*@
+                                        <span style="margin-top:5px; padding-left:10px" class="right">
+                                            @if (Model.EventosPrimeiraQuinta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiraQuinta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosSegundaQuinta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundaQuinta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosTerceiraQuinta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiraQuinta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuartaQuinta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartaQuinta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuintaQuinta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintaQuinta.Count
+                                                </span>
+                                            }
+                                        </span>
                                     </span>
                                 </span>
                             </div>
@@ -507,7 +655,7 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeSextasMes)
-                    {
+                                        {
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -515,8 +663,38 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>*@
+                                        <span style="margin-top:5px; padding-left:10px" class="right">
+                                            @if (Model.EventosPrimeiraSexta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiraSexta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosSegundaSexta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundaSexta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosTerceiraSexta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiraSexta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuartaSexta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartaSexta.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuintaSexta.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintaSexta.Count
+                                                </span>
+                                            }
+                                        </span>
                                     </span>
                                 </span>
                             </div>
@@ -532,7 +710,7 @@
                         </div>
                     </li>
                     @foreach (var item in Model.QuantidadeSabadosMes)
-                    {
+                                        {
                         <li class="" style="transform: translateX(0px); opacity: 0;">
                             <div style="padding:8px; min-height:126px; max-height:126px;" class="card hoverable col s12 m6 l12">
                                 <span class="card-title grey-text text-darken-4">
@@ -540,8 +718,38 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @*<input id="@item.Id" type="checkbox" value="@item.Id" ng-checked="selection.indexOf(@item.Id) > -1" ng-click="toggleSelection(@item.Id)" />
-                                        <label for="@item.Id"></label>*@
+                                        <span style="margin-top:5px; padding-left:10px" class="right">
+                                            @if (Model.EventosPrimeiroSabado.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiroSabado.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosSegundoSabado.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundoSabado.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosTerceiroSabado.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiroSabado.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuartoSabado.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartoSabado.Count
+                                                </span>
+                                            }
+                                            else if (Model.EventosQuintoSabado.Any(e => e.DataEvento == item.Date))
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintoSabado.Count
+                                                </span>
+                                            }
+                                        </span>
                                     </span>
                                 </span>
                             </div>

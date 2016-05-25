@@ -58,58 +58,46 @@ namespace AgendaApp.Models
         public List<Evento> EventosMensais { get; set; }
 
         public List<Evento> EventosPrimeiroDomingo { get; set; }
-
         public List<Evento> EventosSegundoDomingo { get; set; }
-
         public List<Evento> EventosTerceiroDomingo { get; set; }
-
         public List<Evento> EventosQuartoDomingo { get; set; }
-
         public List<Evento> EventosQuintoDomingo { get; set; }
 
-
         public List<Evento> EventosPrimeiraSegunda { get; set; }
-
         public List<Evento> EventosSegundaSegunda { get; set; }
-
         public List<Evento> EventosTerceiraSegunda { get; set; }
-
         public List<Evento> EventosQuartaSegunda { get; set; }
-
         public List<Evento> EventosQuintaSegunda { get; set; }
 
-
         public List<Evento> EventosPrimeiraTerca { get; set; }
-
         public List<Evento> EventosSegundaTerca { get; set; }
-
         public List<Evento> EventosTerceiraTerca { get; set; }
-
         public List<Evento> EventosQuartaTerca { get; set; }
-
         public List<Evento> EventosQuintaTerca { get; set; }
 
-
         public List<Evento> EventosPrimeiraQuarta { get; set; }
-
         public List<Evento> EventosSegundaQuarta { get; set; }
-
         public List<Evento> EventosTerceiraQuarta { get; set; }
-
         public List<Evento> EventosQuartaQuarta { get; set; }
-
         public List<Evento> EventosQuintaQuarta { get; set; }
 
-
         public List<Evento> EventosPrimeiraQuinta { get; set; }
-
         public List<Evento> EventosSegundaQuinta { get; set; }
-
         public List<Evento> EventosTerceiraQuinta { get; set; }
-
         public List<Evento> EventosQuartaQuinta { get; set; }
 
         public List<Evento> EventosQuintaQuinta { get; set; }
+        public List<Evento> EventosPrimeiraSexta { get; set; }
+        public List<Evento> EventosSegundaSexta { get; set; }
+        public List<Evento> EventosTerceiraSexta { get; set; }
+        public List<Evento> EventosQuartaSexta { get; set; }
+        public List<Evento> EventosQuintaSexta { get; set; }
+
+        public List<Evento> EventosPrimeiroSabado { get; set; }
+        public List<Evento> EventosSegundoSabado { get; set; }
+        public List<Evento> EventosTerceiroSabado { get; set; }
+        public List<Evento> EventosQuartoSabado { get; set; }
+        public List<Evento> EventosQuintoSabado { get; set; }
 
         #endregion
 
