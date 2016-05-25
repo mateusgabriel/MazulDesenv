@@ -119,6 +119,7 @@ namespace AgendaApp.Controllers
                     }
                 }
 
+                TempData["Sucesso"] = "Criado";
                 models.inserirEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -215,6 +216,7 @@ namespace AgendaApp.Controllers
                     }
                 }
 
+                TempData["Sucesso"] = "Salvo";
                 models.editarEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -264,6 +266,8 @@ namespace AgendaApp.Controllers
                 Evento evento = models.consultarEventosPorId((int)eventoIds[0]);
                 eventos.Add(evento);
             }
+
+            TempData["Sucesso"] = "Excluído";
             return View(eventos);
         }
 
