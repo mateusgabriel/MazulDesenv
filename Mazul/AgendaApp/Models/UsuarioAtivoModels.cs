@@ -47,17 +47,30 @@ namespace AgendaApp.Models
             return valida;
         }
 
-        public void editarUsuarioAtivo(UsuarioAtivo usuarioAtivo)
+        public bool editarUsuarioAtivo(UsuarioAtivo usuarioAtivo, string salt)
         {
+            bool valida = true;
             try
             {
-                db.Entry(usuarioAtivo).State = EntityState.Modified;
-                db.SaveChanges();
+
+               if (ValidarSenha(usuarioAtivo.Senha))
+                {
+                    usuarioAtivo.Senha = Hash.CriarSenhaHash(usuarioAtivo.Senha, salt);
+                    usuarioAtivo.Salt = salt;
+
+                    db.Entry(usuarioAtivo).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else {
+                    valida = false;
+                }             
             }
             catch (Exception ex)
             {
                 //
             }
+
+            return valida;
         }
 
         public void excluirUsuarioAtivo(UsuarioAtivo usuarioAtivo)
