@@ -263,10 +263,9 @@ namespace AgendaApp.Controllers
 
             if (usuarioAtivo != null)
             {
+                var viewModels = new RedefinicaoSenhaViewModels();
 
-                var viewModels = new RedefinirSenhaViewModels();
-
-                viewModels.UsuarioId = usuarioAtivo.Id;
+                viewModels.IdUsuarioAtivo = usuarioAtivo.Id;
 
                 return View(viewModels);
                 //  return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
@@ -281,21 +280,27 @@ namespace AgendaApp.Controllers
 
         // POST: UsuarioAtivo/Redefeinir Senha
         [HttpPost]
-        public ActionResult RedefinirSenha(RedefinirSenhaViewModels viewModels)
+        public ActionResult RedefinirSenha(RedefinicaoSenhaViewModels viewModels)
         {
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId(viewModels.UsuarioId);
+                    UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId(viewModels.IdUsuarioAtivo);
 
                     usuarioAtivo.Senha = viewModels.Senha;
+                    var salt = Crypto.GenerateSalt();
 
-                    models.editarUsuarioAtivo(usuarioAtivo);
-
-                    TempData["Sucesso"] = "Salvo";
-                    return RedirectToAction("Index");
+                    if (!models.editarUsuarioAtivo(usuarioAtivo, salt))
+                    {
+                        ModelState.AddModelError("PasswordError", "A senha deve conter ao menos 7 caracteres sendo no mínimo um numérico, um símbolo especial e uma letra maiúscula.");
+                    }
+                    else
+                    {
+                        TempData["Sucesso"] = "Salvo";
+                        return RedirectToAction("Index");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -322,8 +327,7 @@ namespace AgendaApp.Controllers
                 {
                     try {
                         var salt = Crypto.GenerateSalt();
-                        usuarioAtivo.Salt = salt;
-                        models.editarUsuarioAtivo(usuarioAtivo);
+                        models.editarUsuarioAtivo(usuarioAtivo, salt);
 
                         enviarEmail(usuarioAtivo, salt);
                         TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu email.";

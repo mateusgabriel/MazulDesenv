@@ -1,17 +1,19 @@
-﻿@model AgendaApp.Models.RedefinirSenhaViewModels
+﻿@model AgendaApp.Models.RedefinicaoSenhaViewModels
+
+@{
+    ViewBag.Title = "RedefinirSenha";
+}
 <head>
-    @{
-        ViewBag.Title = "RedefinirSenha";
-    }
-    <title>Editar</title>
-    @if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
-    {
-        <script>
+@if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
+{
+    <script>
             alerta('@Html.ValidationMessage("Error")', 'erro');
-        </script>
-    }
+    </script>
+}
 </head>
+
 <body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -32,12 +34,11 @@
                     <div class="input-field col s12 m12 l12">
                         <i class="material-icons prefix">lock_outline</i>
                         <label for="ConfirmaSenha">Confirmar Senha</label>
-                        @Html.PasswordFor(model => model.ConfirmarSenha, new { required = "required" })
-                        @Html.ValidationMessageFor(model => model.ConfirmarSenha)
+                        @Html.PasswordFor(model => model.ConfirmaSenha, new { required = "required" })
+                        @Html.ValidationMessageFor(model => model.ConfirmaSenha)
                     </div>
                 </div>
-
-                @Html.HiddenFor(model => model.UsuarioId, new { required = "required" })
+                @Html.HiddenFor(model => model.IdUsuarioAtivo, new { required = "required" })
 
                 <div class="row">
                     <br /><br />
@@ -53,4 +54,5 @@
             </div>
         </form>
     }
+
 </body>
