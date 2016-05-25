@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -233,31 +235,45 @@ namespace AgendaApp.Controllers
             return View(usuariosAtivos);
         }
 
-        // GET: UsuarioAtivo/Recuperar Senha
+        // GET: UsuarioAtivo/Redefinir Senha
         [HttpGet]
-        public ActionResult recuperarSenha()
+        public ActionResult RedefinirSenha()
         {
-            return View();
+
+            Uri someUri = Page.Request.Url;
+            string urlstr = string.Format(
+                "AbsoluteUri: {0}<br/> Scheme: {1}<br/> Host: {2}<br/> Query: {3} ",
+                someUri.AbsoluteUri, someUri.Scheme, someUri.Host, someUri.Query);
+
+              return RedirectToAction("Login", "Home");
         }
 
         // POST: UsuarioAtivo/Inserir
         [HttpPost]
-        public ActionResult recuperarSenha(String login)
+        public ActionResult RecuperarSenha(String login)
         {
             if (ModelState.IsValid)
             {
-                UsuarioAtivo usuario = models.consultarUsuarioAtivoPorLogin(login);
+                UsuarioAtivo usuarioAtivo = models.consultarUsuarioAtivoPorLogin(login);
 
-                if (usuario != null) {
-                    string hash = usuario.Email + DateTime.Today.ToLongDateString() + "mazul";
+                if (usuarioAtivo != null)
+                {
+                    String hash = usuarioAtivo.Email + DateTime.Today.ToLongDateString() + "mazulrecuperaçãodesenha";
                     hash = converterParaMD5(hash);
+                    enviarEmail(usuarioAtivo, hash);
+                    TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu email.";
+                }
+                else {
+                    ModelState.AddModelError("Erro", "Login incorreto.");
                 }
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Preencha os campos corretamente.");
+                ModelState.AddModelError("Erro", "Preencha os campos corretamente.");
             }
-            return View();
+
+            
+            return RedirectToAction("Login", "Home");
         }
 
         private string converterParaMD5(string input)
@@ -286,6 +302,31 @@ namespace AgendaApp.Controllers
 
             return sb.ToString();
 
+        }
+
+        private void enviarEmail(UsuarioAtivo usuarioAtivo, String hash) {
+            var usuarioNome = usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome;
+            var usuarioEmail = usuarioAtivo.Email;
+            string body = @"<html><body>
+                                          <p>Olá! <br /><br />" + usuarioNome + ", para redefinir sua senha click no link abaixo:</p> <p>http://localhost:6272/redefinirsenha/" + hash + "</p> <p>Atenciosamente,</p></body></html>";
+
+            try
+            {
+                MailMessage mail = new MailMessage(usuarioEmail, usuarioEmail, "Redefinição de senha", body);
+                mail.From = new MailAddress("mazulapp@gmail.com", "Mazul");
+                mail.IsBodyHtml = true; // necessary if you're using html email
+
+                NetworkCredential credential = new NetworkCredential("mazulapp@gmail.com", "Asdzxc123$");
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = credential;
+                smtp.Send(mail);
+            }
+            catch (SmtpException e)
+            {
+                TempData["Error"] = "Houve um problema e o contato não foi notificado sobre este evento. Fique tranquilo, já estamos solucionando o problema.";
+            }
         }
     }
 }
