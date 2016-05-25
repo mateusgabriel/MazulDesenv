@@ -58,7 +58,7 @@ namespace AgendaApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login inválido.");
+                    ModelState.AddModelError("", "Vixe! o usuário ou senha estão incorretos. :/");
                 }
             }
             else
