@@ -73,6 +73,25 @@ namespace AgendaApp.Models
             return valida;
         }
 
+        public bool editarSalt(UsuarioAtivo usuarioAtivo, string salt)
+        {
+            bool valida = true;
+            try
+            {
+                   usuarioAtivo.Salt = salt;
+
+                    db.Entry(usuarioAtivo).State = EntityState.Modified;
+                    db.SaveChanges();
+              
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            return valida;
+        }
+
         public void excluirUsuarioAtivo(UsuarioAtivo usuarioAtivo)
         {
             try
