@@ -68,7 +68,7 @@ namespace AgendaApp.Controllers
                 }
                 else
                 {
-                    TempData["Sucesso"] = "Bem vindo ao Mazul! \o/ \nEntre com seu login e senha e aproveite todos os recursos que preparamos para você! ^^";
+                    TempData["Sucesso"] = "Bem vindo ao Mazul! \\o/ \nEntre com seu login e senha e aproveite todos os recursos que preparamos para você! ^^";
                     return RedirectToAction("Login","Home");
                 }
             }
@@ -123,7 +123,7 @@ namespace AgendaApp.Controllers
                     usuarioAtivo.Senha = usuarioAtivoViewModels.Senha;
 
 
-                    models.editarUsuarioAtivo(usuarioAtivo);
+                  //  models.editarUsuarioAtivo(usuarioAtivo, salt);
                     TempData["Sucesso"] = "Pronto! Seus dados foram atualizados. ^^";
                     return RedirectToAction("Index");
                 }
@@ -290,7 +290,7 @@ namespace AgendaApp.Controllers
                     UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId(viewModels.IdUsuarioAtivo);
 
                     usuarioAtivo.Senha = viewModels.Senha;
-                    var salt = Crypto.GenerateSalt();
+                    var salt = Crypto.SHA1(usuarioAtivo.Senha);
 
                     if (!models.editarUsuarioAtivo(usuarioAtivo, salt))
                     {
@@ -326,8 +326,8 @@ namespace AgendaApp.Controllers
                 if (usuarioAtivo != null)
                 {
                     try {
-                        var salt = Crypto.GenerateSalt();
-                        models.editarUsuarioAtivo(usuarioAtivo, salt);
+                        var salt = Crypto.SHA1(usuarioAtivo.Email + DateTime.Today + usuarioAtivo.DataRegistro);
+                        models.editarSalt(usuarioAtivo, salt);
 
                         enviarEmail(usuarioAtivo, salt);
                         TempData["Sucesso"] = "Pronto! Um link para redefinição de senha foi enviado para seu e-mail. o/";
@@ -345,7 +345,7 @@ namespace AgendaApp.Controllers
 
          private void enviarEmail(UsuarioAtivo usuarioAtivo, string salt) {
             string body = @"<html><body>
-                                          <p>Olá! <br /><br />" + usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome + ", você solicitou pelo nosso site ajuda para recuperar sua senha. Para voltar a aproveitar todas os recursos de nosso site você precisa criar uma nova senha, para isso basta clicar no link a seguir <strong>http://localhost:6272/usuarioAtivo/redefinirsenha/" + salt + "</strong></p><p>Fácil né?!  Esperamos que tudo dê certo! ^^ <br /> Atenciosamente, Equipe Mazul.</p></body></html>";
+                                          <p>Olá! <br /><br />" + usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome + ", você solicitou pelo nosso site ajuda para recuperar sua senha. Para voltar a aproveitar todas os recursos de nosso site você precisa criar uma nova senha, para isso basta clicar no link a seguir: </p> <p><strong>http://localhost:6272/usuarioAtivo/redefinirsenha/" + salt + "</strong></p><br /><p>Fácil né?!  Esperamos que tudo dê certo! ^^ <br /><br /> Atenciosamente, Equipe Mazul.</p></body></html>";
 
             try
             {
