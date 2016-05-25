@@ -92,9 +92,9 @@ namespace AgendaApp.Controllers
                         var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
                         var usuarioEmail = evento.UsuarioAtivo.Email;
                         string body = @"<html><body>
-                                            <p>Olá! <br/><br/>" + usuarioNome + " marcou " + evento.Nome + " com você no(a) " + evento.Local +
+                                            <p>Olá! O <br/><br/>" + usuarioNome + " marcou " + evento.Nome + " com você no(a) " + evento.Local +
                                                            " no dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
-                                            ".</p><p>" + evento.Descricao + "</p> <p>Atenciosamente,</p></body></html>";
+                                            ".</p><p>" + evento.Descricao + "</p> <p>Atenciosamente, Mazul.</p></body></html>";
 
                         try
                         {
@@ -112,14 +112,14 @@ namespace AgendaApp.Controllers
                         }
                         catch (SmtpException e)
                         {
-                            TempData["ErrorMail"] = "Houve um problema e o contato não foi notificado sobre este evento. Fique tranquilo, já estamos solucionando o problema.";
+                            TempData["ErrorMail"] = "Vixe! Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. >< \n Mas fique tranquilo, já estamos solucionando o problema. o/";
                             //ModelState.AddModelError("ErrorMail", "Ocorreu um erro ao enviar email para contato. Fique tranquilo, já estamos solucionando o problema." + e);
                         }
 
                     }
                 }
 
-                TempData["Sucesso"] = "Criado";
+                TempData["Sucesso"] = "Pronto! O evento foi criado. ^^";
                 models.inserirEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -198,9 +198,9 @@ namespace AgendaApp.Controllers
                         var usuarioNome = evento.UsuarioAtivo.Nome + " " + evento.UsuarioAtivo.Sobrenome;
                         var usuarioEmail = evento.UsuarioAtivo.Email;
                         string body = @"<html><body>
-                                            <p>Olá! <br/><br/>" + usuarioNome + " remarcou " + evento.Nome + " com você no(a) " + evento.Local +
+                                            <p>Olá! O <br/><br/>" + usuarioNome + " remarcou " + evento.Nome + " com você no(a) " + evento.Local +
                                                            " para o dia " + evento.DataEvento.ToShortDateString() + " às " + evento.Horario.ToString(@"hh\:mm") +
-                                            ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente,</p></body></html>";
+                                            ".</p><p>" + evento.Descricao + "<br/> </p> <p>Atenciosamente, Mazul.</p></body></html>";
 
                         MailMessage mail = new MailMessage(usuarioEmail, email, evento.Nome, body);
                         mail.From = new MailAddress(usuarioEmail, usuarioNome);
@@ -216,7 +216,7 @@ namespace AgendaApp.Controllers
                     }
                 }
 
-                TempData["Sucesso"] = "Salvo";
+                TempData["Sucesso"] = "Pronto! O evento foi atualizado. ^^";
                 models.editarEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -267,7 +267,7 @@ namespace AgendaApp.Controllers
                 eventos.Add(evento);
             }
 
-            TempData["Sucesso"] = "Excluído";
+            TempData["Sucesso"] = "Pronto! O evento foi excluído. ^^";
             return View(eventos);
         }
 
