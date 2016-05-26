@@ -64,12 +64,12 @@ namespace AgendaApp.Controllers
                 }
 
                 models.inserirUsuarioPassivo(usuarioPassivo);
-                TempData["Sucesso"] = "Adicionado";
+                TempData["Sucesso"] = "Pronto! O contato foi adicionado. ^^";
                 return RedirectToAction("Index");
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Preencha os campos corretamente.");
+                ModelState.AddModelError("FieldsError", "Vixe! Alguns campos não estão preenchidos corretamente. :/");
             }
 
             return View();
@@ -100,11 +100,11 @@ namespace AgendaApp.Controllers
                 try
                 {
                     models.editarUsuarioPassivo(usuarioPassivo);
-                    TempData["Sucesso"] = "Salvo";
+                    TempData["Sucesso"] = "Pronto! O contato foi atualizado. ^^";
                     return RedirectToAction("Index");
                 }
                 catch (Exception e) {
-                    TempData["Erro"] = "Erro ao editar";
+                    TempData["Erro"] = "Vixe! Parece que houve algum erro ao atualizar o contato. ><";
                 }
             }
             return View();
@@ -151,7 +151,7 @@ namespace AgendaApp.Controllers
                 UsuarioPassivo contato = models.consultaUsuariosPassivosPorId((int)contatoIds[0]);
                 contatos.Add(contato);
             }
-            TempData["Sucesso"] = "Excluído";
+            TempData["Sucesso"] = "Pronto! O contato foi excluído. ^^";
             return View(contatos);
         }
 

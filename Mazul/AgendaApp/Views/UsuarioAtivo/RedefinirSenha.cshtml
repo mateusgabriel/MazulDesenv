@@ -1,16 +1,15 @@
-﻿@model AgendaApp.Models.UsuarioAtivoViewModels
+﻿@model AgendaApp.Models.RedefinicaoSenhaViewModels
 
-<head>
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "RedefinirSenha";
 }
-    <title>Editar</title>
-    @if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
-    {
-        <script>
+<head>
+@if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
+{
+    <script>
             alerta('@Html.ValidationMessage("Error")', 'erro');
-        </script>
-    }
+    </script>
+}
 </head>
 
 <body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
@@ -21,7 +20,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <h4>Redefinição de Senha</h4>
-        <br/><br/>
+        <br /><br />
         <form class="col s12 m12 l12 ">
             <div class="center">
                 <div class="row">
@@ -39,25 +38,15 @@
                         @Html.ValidationMessageFor(model => model.ConfirmaSenha)
                     </div>
                 </div>
-                    @Html.HiddenFor(model => model.Senha, new { required = "required" })
-                    
-                    @Html.HiddenFor(model => model.Sobrenome, new { required = "required" })
-                  
-                    @Html.HiddenFor(model => model.Endereco, new { required = "required" })
-                  
-                    @Html.HiddenFor(model => model.Email, new { required = "required"})
-          
-                    @Html.HiddenFor(model => model.Telefone, new { required = "required" })
-              
-                    @Html.HiddenFor(model => model.Sexo, new { required = "required" })
-                           
-                 <div class="row">
+                @Html.HiddenFor(model => model.IdUsuarioAtivo, new { required = "required" })
+
+                <div class="row">
                     <br /><br />
                     <a class="btn  s12 m6 l6 waves-effect waves-light light-blue darken-3" href="@Url.Action("Index", "UsuarioAtivo")">
                         <i class="material-icons left">reply</i>
                         Voltar
                     </a>
-                    <button class="btn s12 m6 l6 waves-effect waves-light light-blue darken-3" type="submit" name="Editar">
+                    <button class="btn s12 m6 l6 waves-effect waves-light light-blue darken-3" type="submit" name="RedefinirSenha">
                         Salvar
                         <i class="material-icons right">send</i>
                     </button>

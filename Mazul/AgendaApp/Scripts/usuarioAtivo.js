@@ -1,5 +1,6 @@
 ﻿var usuarioAtivoApp = angular.module("usuarioAtivoApp", ["usuarioAtivoApp.directives"]);
 var itemId;
+$("#telefone").mask("(99) 9999?9-9999");
 
 usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $window) {
     $scope.master = {};
@@ -60,6 +61,7 @@ usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $w
             });
     }
 
+
     $scope.registrar = function () {
         $http({
             traditional: true,
@@ -83,6 +85,21 @@ usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $w
         })
             .success(function (data, status, headers, config) {
                 alert("Usuário editado!")
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to load customer data: ' + error.message;
+                console.log($scope.status);
+            });
+    }
+
+    $scope.recuperarSenha = function (login) {
+        $http({
+            url: '/UsuarioAtivo/RecuperarSenha',
+            method: 'POST',
+            params: { login: login }
+        })
+            .success(function (data, status, headers, config) {
+                alert("Email enviado com sucesso!")
             })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;

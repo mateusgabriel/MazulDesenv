@@ -9,6 +9,13 @@
     <script>
         alerta('@TempData["Sucesso"]', 'sucesso');
     </script>
+
+    @if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
+    {
+        <script>
+            alerta('@Html.ValidationMessage("Erro")', 'erro');
+        </script>
+    }
 </head>
 
 <body ng-app="usuarioAtivoApp" ng-controller="UsuarioAtivoController">
@@ -38,17 +45,20 @@
                                 <i class="material-icons prefix">perm_identity</i>
                                 <label for="Email">Email</label>
                                 @Html.TextBoxFor(model => model.Email, new { required = "required", type = "email" })
+                                @*@Html.ValidationMessageFor(model => model.Email)*@
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s11">
                                 <i class="material-icons prefix">lock_outline</i>
                                 <label for="Senha">Senha</label>
-                                @Html.PasswordFor(model => model.Senha, new { required = "required", type = "password" })
+                                @Html.PasswordFor(model => model.Senha, new { required = "required" })
+                                @*@Html.ValidationMessageFor(model => model.Senha)*@
+                                <a class="modal-trigger" href="#recuperarSenha">Esqueceu sua senha?</a>
                             </div>
                         </div>
                         @Html.ValidationSummary(true)
-                        @Html.ValidationMessage("ErroLogin")
+                        @Html.ValidationMessage("ErroLoginErroLogin")
                     </div>
                     <div class="card-action">
                         <div class="row ">
@@ -63,6 +73,30 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+         <!-- Modal -->
+        <div id="recuperarSenha" class="modal">
+               <button class="btn-flat right right-align pull-s7 col s1 m1 l1 modal-close">X</button>
+              <form name="form" class="css-form" method="post" action="@Url.Action("RecuperarSenha", "UsuarioAtivo")">
+                <div class="modal-content">
+                    <h4>Esqueceu sua senha?</h4>
+
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <label for="Login">Informe seu e-mail</label>
+                            @Html.TextBox("Login", null, new { required = "required" })
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                        <button class="btn-flat col s12 m4 l4 waves-effect waves-light light-blue darken-3 white-text" type="submit" name="Recuperar Senha">
+                            Recuperar Senha
+                        </button>
+                 </div>
+            </form>
         </div>
     }
 </body>
