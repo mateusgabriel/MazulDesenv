@@ -47,6 +47,7 @@ namespace AgendaApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 UsuarioAtivo user = models.VerificarUsuario(email, senha);
 
                 if (user != null)
