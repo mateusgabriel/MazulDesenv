@@ -16,6 +16,33 @@
  border-width: 1px 0;
 }
 
+nav ul a {
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+nav ul li {
+    margin: 0 10px !important;
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+nav ul a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-mobile.side-nav a {
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+.menu-mobile.side-nav li {
+    margin: 0 10px !important;
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+}
+
+
 body {
     display: flex;
     min-height: 100vh;

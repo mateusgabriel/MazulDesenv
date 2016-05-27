@@ -4,23 +4,30 @@
 
     <div class="nav-wrapper blue darken-3">
         <div class="container">
-          <a class="brand-logo"><img src="~/img/image_logo.fw.png" width="140" height="31"/></a>
+          <a class="brand-logo" href="/"><img src="~/img/image_logo.fw.png" width="140" height="31"/></a>
             
             @if (Request.IsAuthenticated)
             {
-                @*@Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Visualizar", "UsuarioAtivo")*@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons right">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>Olá, @User.Identity.GetUserName()</li>  
                     <li>@Html.ActionLink("Inicio", "Index", "Evento")</li>
                     <li>@Html.ActionLink("Contatos", "Index", "UsuarioPassivo")</li>
                     <li>@Html.ActionLink("Sair", "Logout", "Home")</li>
                 </ul>
-                <ul class="side-nav" id="mobile-demo">
-                    <li>@Html.ActionLink("Inicio", "Index", "Evento")</li>
-                    <li class="divider"></li>
-                    <li>@Html.ActionLink("Contatos", "Index", "UsuarioPassivo")</li>
-                    <li class="divider"></li>
-                    <li>@Html.ActionLink("Sair", "Logout", "Home")</li>
+                <ul class="menu-mobile side-nav blue darken-3" id="mobile-demo" style="transform: translateX(0px);">
+                    <li>
+                        Olá, @User.Identity.GetUserName()
+                    </li>
+                    <li>
+                        @Html.ActionLink("Inicio", "Index", "Evento")
+                    </li>
+                    <li>
+                       @Html.ActionLink("Contatos", "Index", "UsuarioPassivo")
+                    </li>
+                    <li>
+                       @Html.ActionLink("Sair", "Logout", "Home")
+                    </li>
                 </ul>
             }
             else

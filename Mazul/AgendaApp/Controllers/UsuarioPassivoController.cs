@@ -64,12 +64,12 @@ namespace AgendaApp.Controllers
                 }
 
                 models.inserirUsuarioPassivo(usuarioPassivo);
-                TempData["Sucesso"] = "Pronto! O contato foi adicionado. ^^";
+                TempData["Sucesso"] = "O contato foi adicionado ^^";
                 return RedirectToAction("Index");
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Vixe! Alguns campos não estão preenchidos corretamente. :/");
+                ModelState.AddModelError("FieldsError", "Alguns campos não estão preenchidos corretamente :/");
             }
 
             return View();
@@ -100,11 +100,11 @@ namespace AgendaApp.Controllers
                 try
                 {
                     models.editarUsuarioPassivo(usuarioPassivo);
-                    TempData["Sucesso"] = "Pronto! O contato foi atualizado. ^^";
+                    TempData["Sucesso"] = "O contato foi atualizado ^^";
                     return RedirectToAction("Index");
                 }
                 catch (Exception e) {
-                    TempData["Erro"] = "Vixe! Parece que houve algum erro ao atualizar o contato. ><";
+                    TempData["Erro"] = "Parece que houve algum erro ao atualizar o contato ><";
                 }
             }
             return View();
@@ -151,7 +151,7 @@ namespace AgendaApp.Controllers
                 UsuarioPassivo contato = models.consultaUsuariosPassivosPorId((int)contatoIds[0]);
                 contatos.Add(contato);
             }
-            TempData["Sucesso"] = "Pronto! O contato foi excluído. ^^";
+            TempData["Sucesso"] = "O contato foi excluído ^^";
             return View(contatos);
         }
 
@@ -184,7 +184,7 @@ namespace AgendaApp.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
+                return Json("Erro de comunicação com o banco de dados - " + ex.Message);
             }
         }
 
@@ -226,7 +226,7 @@ namespace AgendaApp.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
+                return Json("Erro de comunicação com o banco de dados - " + ex.Message);
             }
         }
 
