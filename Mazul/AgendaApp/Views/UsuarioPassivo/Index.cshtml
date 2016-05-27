@@ -6,6 +6,10 @@
     }
     <script type="text/javascript" src="~/Scripts/usuarioPassivo.js"></script>
     <title>Index</title>
+    <script>
+        alerta('@TempData["Sucesso"]', 'sucesso');
+        alerta('@TempData["Erro"]', 'erro');
+    </script>
 </head>
 
 <body ng-app="usuarioPassivoApp" ng-controller="UsuarioPassivoController">
