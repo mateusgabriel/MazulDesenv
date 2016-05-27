@@ -637,6 +637,7 @@ namespace AgendaApp.Models
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
             var semanaDoMes = consultaSemanaDoMes(DateTime.Today);
+            var datas = consultarDiaNasSemanasDoMes(DateTime.Now.Month, DateTime.Now.Year, DayOfWeek.Saturday);
 
             var eventos = db.Eventos
                 .Where(a => a.UsuarioAtivo.Id == userId &&
@@ -742,7 +743,7 @@ namespace AgendaApp.Models
         {
             try
             {
-                Evento evnt = db.Eventos.SingleOrDefault(a => a.Id == evento.Id);
+                Evento evnt = db.Eventos.FirstOrDefault(a => a.Id == evento.Id);
                 db.Entry(evnt).State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -804,7 +805,7 @@ namespace AgendaApp.Models
         public UsuarioAtivo retornarUsuarioLogado()
         {
             var userId = Convert.ToInt32(HttpContext.Current.Session["UsuarioAtivoId"]);
-            UsuarioAtivo us = db.UsuariosAtivos.SingleOrDefault(a => a.Id == userId);
+            UsuarioAtivo us = db.UsuariosAtivos.FirstOrDefault(a => a.Id == userId);
             return us;
         }
 

@@ -3165,9 +3165,22 @@ span.badge.new {
   border-radius: 2px;
 }
 
+span.badge.new2 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #26a69a;
+  border-radius: 2px;
+}
+
 span.badge.new:after {
   content: " evento(s)";
 }
+
+span.badge.new2:after {
+  content: " ";
+}
+
 
 nav ul a span.badge {
   position: static;

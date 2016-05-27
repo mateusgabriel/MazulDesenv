@@ -17,6 +17,8 @@ namespace AgendaApp.Models
 
             try
             {
+                db.Database.Connection.Open();
+
                 usuarioAtivo = db.UsuariosAtivos.Where(a => a.Email == email).FirstOrDefault();
 
                 if (usuarioAtivo != null)

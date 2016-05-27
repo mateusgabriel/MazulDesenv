@@ -354,35 +354,100 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @if (Model.EventosPrimeiroDomingo.Any(e => e.DataEvento == item.Date))
+                                        @if (Model.EventosPrimeiroDomingo.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosPrimeiroDomingo.Count
-                                            </span>
+                                            if (Model.EventosPrimeiroDomingo.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiroDomingo.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosSegundoDomingo.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosSegundoDomingo.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosSegundoDomingo.Count
-                                            </span>
+                                            if (Model.EventosSegundoDomingo.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundoDomingo.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosTerceiroDomingo.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosTerceiroDomingo.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosTerceiroDomingo.Count
-                                            </span>
+                                            if (Model.EventosTerceiroDomingo.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiroDomingo.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosQuartoDomingo.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosQuartoDomingo.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosQuartoDomingo.Count
-                                            </span>
+                                            if (Model.EventosQuartoDomingo.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartoDomingo.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosQuintoDomingo.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosQuintoDomingo.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosQuintoDomingo.Count
-                                            </span>
+                                            if (Model.EventosQuintoDomingo.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintoDomingo.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
                                     </span>
                                 </span>
@@ -417,35 +482,100 @@
                                         @item.Day
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
-                                        @if (Model.EventosPrimeiraSegunda.Any(e => e.DataEvento == item.Date))
+                                        @if (Model.EventosPrimeiraSegunda.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosPrimeiraSegunda.Count
-                                            </span>
+                                            if (Model.EventosPrimeiraSegunda.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosPrimeiraSegunda.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosSegundaSegunda.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosSegundaSegunda.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosSegundaSegunda.Count
-                                            </span>
+                                            if (Model.EventosSegundaSegunda.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosSegundaSegunda.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosTerceiraSegunda.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosTerceiraSegunda.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosTerceiraSegunda.Count
-                                            </span>
+                                            if (Model.EventosTerceiraSegunda.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosTerceiraSegunda.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosQuartaSegunda.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosQuartaSegunda.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosQuartaSegunda.Count
-                                            </span>
+                                            if (Model.EventosQuartaSegunda.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuartaSegunda.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
-                                        else if (Model.EventosQuintaSegunda.Any(e => e.DataEvento == item.Date))
+                                        else if (Model.EventosQuintaSegunda.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                         {
-                                            <span class="new badge red lighten-2">
-                                                @Model.EventosQuintaSegunda.Count
-                                            </span>
+                                            if (Model.EventosQuintaSegunda.Count > 0)
+                                            {
+                                                <span class="new badge red lighten-2">
+                                                    @Model.EventosQuintaSegunda.Count
+                                                </span>
+                                            }
+
+                                            foreach (var feriado in Model.Feriados)
+                                            {
+                                                if (feriado.Data == item.Date)
+                                                {
+                                                    <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                        @feriado.Descricao
+                                                    </span>
+                                                }
+                                            }
                                         }
                                     </span>
                                 </span>
@@ -481,35 +611,100 @@
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
                                         <span style="margin-top:5px; padding-left:10px" class="right">
-                                            @if (Model.EventosPrimeiraTerca.Any(e => e.DataEvento == item.Date))
+                                            @if (Model.EventosPrimeiraTerca.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosPrimeiraTerca.Count
-                                                </span>
+                                                if (Model.EventosPrimeiraTerca.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosPrimeiraTerca.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosSegundaTerca.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosSegundaTerca.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosSegundaTerca.Count
-                                                </span>
+                                                if (Model.EventosSegundaTerca.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosSegundaTerca.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosTerceiraTerca.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosTerceiraTerca.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosTerceiraTerca.Count
-                                                </span>
+                                                if (Model.EventosTerceiraTerca.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosTerceiraTerca.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuartaTerca.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuartaTerca.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuartaTerca.Count
-                                                </span>
+                                                if (Model.EventosQuartaTerca.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuartaTerca.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuintaTerca.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuintaTerca.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuintaTerca.Count
-                                                </span>
+                                                if (Model.EventosQuintaTerca.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuintaTerca.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </span>
@@ -546,35 +741,101 @@
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
                                         <span style="margin-top:5px; padding-left:10px" class="right">
-                                            @if (Model.EventosPrimeiraQuarta.Any(e => e.DataEvento == item.Date))
+                                            @if (Model.EventosPrimeiraQuarta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosPrimeiraQuarta.Count
-                                                </span>
+                                                if (Model.EventosPrimeiraQuarta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosPrimeiraQuarta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosSegundaQuarta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosSegundaQuarta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosSegundaQuarta.Count
-                                                </span>
+
+                                                if (Model.EventosSegundaQuarta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosSegundaQuarta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosTerceiraQuarta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosTerceiraQuarta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosTerceiraQuarta.Count
-                                                </span>
+                                                if (Model.EventosTerceiraQuarta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosTerceiraQuarta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuartaQuarta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuartaQuarta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuartaQuarta.Count
-                                                </span>
+                                                if (Model.EventosQuartaQuarta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuartaQuarta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuintaQuarta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuintaQuarta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuintaQuarta.Count
-                                                </span>
+                                                if (Model.EventosQuintaQuarta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuintaQuarta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </span>
@@ -594,7 +855,7 @@
                     @foreach (var item in Model.QuantidadeQuintasMes)
                                         {
                         @*var existePrimeiroDomingo = Model.EventosPrimeiroDomingo.Where(e => e.SemanaDoMes == 1);
-                                            if (!existePrimeiroDomingo.Any() && existeCardInvisivel)
+                                            if (!existePrimeiroDomingo.Any() || existeCardInvisivel)
                                             {
                             <li class="" style="transform: translateX(0px); opacity: 0;">
                                 <div style="padding:8px; min-height:126px; max-height:126px; visibility:hidden;" class="card hoverable col s12 m6 l12">
@@ -612,35 +873,101 @@
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
                                         <span style="margin-top:5px; padding-left:10px" class="right">
-                                            @if (Model.EventosPrimeiraQuinta.Any(e => e.DataEvento == item.Date))
+                                            @if (Model.EventosPrimeiraQuinta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosPrimeiraQuinta.Count
-                                                </span>
+                                                if (Model.EventosPrimeiraQuinta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosPrimeiraQuinta.Count
+                                                    </span>
+                                                }
+                                                
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosSegundaQuinta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosSegundaQuinta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosSegundaQuinta.Count
-                                                </span>
+                                                if (Model.EventosSegundaQuinta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosSegundaQuinta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosTerceiraQuinta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosTerceiraQuinta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosTerceiraQuinta.Count
-                                                </span>
+                                                if (Model.EventosTerceiraQuinta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosTerceiraQuinta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuartaQuinta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuartaQuinta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuartaQuinta.Count
-                                                </span>
+                                                if (Model.EventosQuartaQuinta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuartaQuinta.Count
+                                                    </span>
+                                                }
+
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuintaQuinta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuintaQuinta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuintaQuinta.Count
-                                                </span>
+                                                if (Model.EventosQuintaQuinta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuintaQuinta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </span>
@@ -667,35 +994,100 @@
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
                                         <span style="margin-top:5px; padding-left:10px" class="right">
-                                            @if (Model.EventosPrimeiraSexta.Any(e => e.DataEvento == item.Date))
+                                            @if (Model.EventosPrimeiraSexta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosPrimeiraSexta.Count
-                                                </span>
+                                                if (Model.EventosPrimeiraSexta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosPrimeiraSexta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosSegundaSexta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosSegundaSexta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosSegundaSexta.Count
-                                                </span>
+                                                if (Model.EventosSegundaSexta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosSegundaSexta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosTerceiraSexta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosTerceiraSexta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosTerceiraSexta.Count
-                                                </span>
+                                                if (Model.EventosTerceiraSexta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosTerceiraSexta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuartaSexta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuartaSexta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuartaSexta.Count
-                                                </span>
+                                                if (Model.EventosQuartaSexta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuartaSexta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuintaSexta.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuintaSexta.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuintaSexta.Count
-                                                </span>
+                                                if (Model.EventosQuintaSexta.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuintaSexta.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </span>
@@ -722,35 +1114,100 @@
                                     </span>
                                     <span style="margin-top:5px; padding-left:10px" class="right">
                                         <span style="margin-top:5px; padding-left:10px" class="right">
-                                            @if (Model.EventosPrimeiroSabado.Any(e => e.DataEvento == item.Date))
+                                            @if (Model.EventosPrimeiroSabado.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 1))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosPrimeiroSabado.Count
-                                                </span>
+                                                if (Model.EventosPrimeiroSabado.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosPrimeiroSabado.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosSegundoSabado.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosSegundoSabado.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 2))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosSegundoSabado.Count
-                                                </span>
+                                                if (Model.EventosSegundoSabado.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosSegundoSabado.Count
+                                                    </span>
+                                                }
+                                                
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosTerceiroSabado.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosTerceiroSabado.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 3))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosTerceiroSabado.Count
-                                                </span>
+                                                if (Model.EventosTerceiroSabado.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosTerceiroSabado.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuartoSabado.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuartoSabado.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 4))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuartoSabado.Count
-                                                </span>
+                                                if (Model.EventosQuartoSabado.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuartoSabado.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
-                                            else if (Model.EventosQuintoSabado.Any(e => e.DataEvento == item.Date))
+                                            else if (Model.EventosQuintoSabado.Any(e => e.DataEvento == item.Date && e.SemanaDoMes == 5))
                                             {
-                                                <span class="new badge red lighten-2">
-                                                    @Model.EventosQuintoSabado.Count
-                                                </span>
+                                                if (Model.EventosQuintoSabado.Count > 0)
+                                                {
+                                                    <span class="new badge red lighten-2">
+                                                        @Model.EventosQuintoSabado.Count
+                                                    </span>
+                                                }
+
+                                                foreach (var feriado in Model.Feriados)
+                                                {
+                                                    if (feriado.Data == item.Date)
+                                                    {
+                                                        <span class="new2 badge yellow accent-3 white-text" style="margin-top:25px;font-size:0.8rem;">
+                                                            @feriado.Descricao
+                                                        </span>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </span>

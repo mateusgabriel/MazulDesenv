@@ -135,5 +135,7 @@ namespace AgendaApp.Models
                 return _itens;
             }
         }
+
+        public List<Feriado> Feriados;
     }
 }

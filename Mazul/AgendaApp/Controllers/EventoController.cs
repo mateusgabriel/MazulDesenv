@@ -18,6 +18,29 @@ namespace AgendaApp.Controllers
         // [AllowAnonymous]
         public ActionResult Index()
         {
+            //MUDE AQUI O ANO PARA TESTAR A CLASSE FERIADOS MÓVEIS
+            //int anoTeste = 2016;
+
+            //Feriados fm = new Feriados(anoTeste);
+            //List<Feriado> lista = fm.feriados;
+
+            //Console.WriteLine("Feriados do ano: " + anoTeste);
+            //Console.WriteLine("------------------------");
+
+            //foreach (Feriado f in lista)
+            //    Console.WriteLine(string.Format("{0} - {1}", f.Data.ToString("dd/MM/yyyy"), f.Descricao));
+
+            //Console.WriteLine("------------------------");
+            //Console.WriteLine();
+
+            //DateTime dataTeste = DateTime.Parse("2011-03-05");
+            //Console.WriteLine("Data de teste: " + dataTeste.ToLongDateString());
+            //Console.WriteLine("------------------------");
+            //Console.WriteLine("Feriado? " + fm.IsFeriado(dataTeste));
+            //Console.WriteLine("Dia útil? " + fm.IsDiaUtil(dataTeste));
+            //Console.WriteLine("Próximo dia útil: " + fm.ProximoDiaUtil(dataTeste).ToLongDateString());
+            //Console.In.ReadLine();
+
             if (Session["UsuarioAtivoId"] == null)
             {
                 return RedirectToAction("Login", "Home");
@@ -70,7 +93,7 @@ namespace AgendaApp.Controllers
                 evento.Descricao = eventoViewModel.Descricao;
                 evento.Local = eventoViewModel.Local;
                 evento.Periodicidade = eventoViewModel.Periodicidade;
-                evento.SemanaDoMes = models.consultaSemanaDoMes(DateTime.Today);
+                evento.SemanaDoMes = models.consultaSemanaDoMes(eventoViewModel.DataEvento.Date);
                 evento.UsuarioAtivo = models.retornarUsuarioLogado();
 
                 if (contatos != null)
@@ -174,6 +197,7 @@ namespace AgendaApp.Controllers
                 evento.Nome = eventoViewModel.Nome;
                 evento.DataEvento = eventoViewModel.DataEvento;
                 evento.DiaDaSemana = eventoViewModel.DataEvento.DayOfWeek;
+                evento.SemanaDoMes = models.consultaSemanaDoMes(eventoViewModel.DataEvento.Date);
                 evento.Descricao = eventoViewModel.Descricao;
                 evento.Local = eventoViewModel.Local;
                 evento.Periodicidade = eventoViewModel.Periodicidade;
@@ -461,7 +485,13 @@ namespace AgendaApp.Controllers
             eventosMensaisViewModel.EventosTerceiroSabado = eventosTerceiroSabado;
             eventosMensaisViewModel.EventosQuartoSabado = eventosQuartoSabado;
             eventosMensaisViewModel.EventosQuintoSabado = eventosQuintoSabado;
-            
+
+            Feriados fm = new Feriados(DateTime.Now.Year);
+            eventosMensaisViewModel.Feriados = fm.feriados;
+
+            //foreach (Feriado f in lista)
+                //Console.WriteLine(string.Format("{0} - {1}", f.Data.ToString("dd/MM/yyyy"), f.Descricao));
+
             return eventosMensaisViewModel;
         }
 
