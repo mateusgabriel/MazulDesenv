@@ -64,11 +64,11 @@ namespace AgendaApp.Controllers
 
                 if (!models.inserirUsuarioAtivo(usuarioAtivo)) 
                 {
-                    ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
+                    ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ Sua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
                 }
                 else
                 {
-                    TempData["Sucesso"] = "Bem vindo ao Mazul! \\o/ \nEntre com seu login e senha e aproveite todos os recursos que preparamos para você!";
+                    TempData["Sucesso"] = "Bem vindo ao Mazul! \\o/ Entre com seu login e senha e aproveite todos os recursos que preparamos para você!";
                     return RedirectToAction("Login","Home");
                 }
             }
@@ -241,7 +241,7 @@ namespace AgendaApp.Controllers
                 //  return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
             }
             else {
-                TempData["Erro"] = "Parece que o seu link para recuperãção de senha expirou :/ \nClique em Esqueceu sua senha? e informe seu e-mail para que possamos enviar para seu e-mail um novo link";
+                TempData["Erro"] = "Parece que o seu link para recuperãção de senha expirou :/ Clique em Esqueceu sua senha? e informe seu e-mail para que possamos enviar para seu e-mail um novo link";
             }
             
 
@@ -264,11 +264,11 @@ namespace AgendaApp.Controllers
 
                     if (!models.editarUsuarioAtivo(usuarioAtivo, salt))
                     {
-                        ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
+                        ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ Sua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
                     }
                     else
                     {
-                        TempData["Sucesso"] = "Sua senha foi redefinida. \nEntre com seu usuário e sua nova senha ^^";
+                        TempData["Sucesso"] = "Sua senha foi redefinida. Entre com seu usuário e sua nova senha ^^";
                         return RedirectToAction("Index");
                     }
                 }
@@ -333,7 +333,7 @@ namespace AgendaApp.Controllers
             catch (SmtpException e)
             {
                 Console.WriteLine(e);
-                throw new SmtpException("Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. >< \n Mas fique tranquilo, já estamos solucionando o problema o/");
+                throw new SmtpException("Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. ><  Mas fique tranquilo, já estamos solucionando o problema o/");
             }
         }
     }

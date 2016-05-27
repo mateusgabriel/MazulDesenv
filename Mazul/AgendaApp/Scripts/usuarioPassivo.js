@@ -2,6 +2,7 @@
 var itemId;
 
 usuarioPassivoApp.controller('UsuarioPassivoController', function ($scope, $http, $window) {
+    $("#Telefone").mask("(99) 99999-999?9");
 
     $scope.selection = [];
     $scope.toggleSelection = function (contatoId) {

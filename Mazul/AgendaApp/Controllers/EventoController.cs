@@ -135,20 +135,20 @@ namespace AgendaApp.Controllers
                         }
                         catch (SmtpException e)
                         {
-                            TempData["ErrorMail"] = "Vixe! Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. >< \n Mas fique tranquilo, já estamos solucionando o problema. o/";
+                            TempData["ErrorMail"] = "Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha ><  Mas fique tranquilo, já estamos solucionando o problema o/";
                             //ModelState.AddModelError("ErrorMail", "Ocorreu um erro ao enviar email para contato. Fique tranquilo, já estamos solucionando o problema." + e);
                         }
 
                     }
                 }
 
-                TempData["Sucesso"] = "Pronto! O evento foi criado. ^^";
+                TempData["Sucesso"] = "O evento foi criado ^^";
                 models.inserirEvento(evento);
                 return RedirectToAction("Index");
             }
             else
             {
-                ModelState.AddModelError("erro", "Preencha os campos corretamente.");
+                ModelState.AddModelError("erro", "Alguns campos não estão preenchidos corretamente :/");
             }
             return View();
         }
@@ -240,7 +240,7 @@ namespace AgendaApp.Controllers
                     }
                 }
 
-                TempData["Sucesso"] = "Pronto! O evento foi atualizado. ^^";
+                TempData["Sucesso"] = "O evento foi atualizado ^^";
                 models.editarEvento(evento);
                 return RedirectToAction("Index");
             }
@@ -291,7 +291,7 @@ namespace AgendaApp.Controllers
                 eventos.Add(evento);
             }
 
-            TempData["Sucesso"] = "Pronto! O evento foi excluído. ^^";
+            TempData["Sucesso"] = "O evento foi excluído ^^";
             return View(eventos);
         }
 
@@ -318,7 +318,7 @@ namespace AgendaApp.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
+                return Json("Erro de comunicação com o banco de dados - " + ex.Message);
             }
         }
 
@@ -359,7 +359,7 @@ namespace AgendaApp.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
+                return Json("Erro de comunicação com o banco de dados - " + ex.Message);
             }
         }
 

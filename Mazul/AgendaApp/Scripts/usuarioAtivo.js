@@ -2,9 +2,12 @@
 var itemId;
 
 
-usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $window) {
-    $scope.master = {};
 
+usuarioAtivoApp.controller('UsuarioAtivoController', function ($scope, $http, $window) {
+    $("#Telefone").mask("(99) 99999-999?9");
+
+    $scope.master = {};
+    
     $scope.update = function (user) {
         $scope.master = angular.copy(user);
     };
