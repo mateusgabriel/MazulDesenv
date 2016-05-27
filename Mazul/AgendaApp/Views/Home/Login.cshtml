@@ -8,6 +8,7 @@
     <title>Login</title>
     <script>
         alerta('@TempData["Sucesso"]', 'sucesso');
+        alerta('@TempData["Erro"]', 'erro');
     </script>
 
     @if (ViewData.ModelState["Erro"] != null && ViewData.ModelState["Erro"].Errors.Any())
@@ -28,14 +29,17 @@
         <br />
 
         <div class="row">
-            <div class="col s12 m6 l6  offset-l1">
-                <img style="width:325px" src="~/img/image_login_small.jpg" />
-
-                @*<p style="font-family:Arial">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed enim quis nunc tristique scelerisque. Suspendisse nibh velit, lacinia ac urna id, bibendum commodo tortor. Aenean tincidunt sem in mi ultricies aliquam.
-            </p>*@
+            <div class="col s12 m6 l7">
+                <div class="row center">
+                 <img style="width:325px" src="~/img/image_login_small.jpg" />
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col pull-l2">
+                        <h5 class="condensed light">Crie eventos diferentes para assuntos diferentes, como escola, trabalho, família e outros.</h5>
+                    </div>
+                </div>
             </div>
-
 
             <div class="card col s12 m6 l5 z-depth-3">
                 <form>
@@ -73,30 +77,26 @@
                     </div>
                 </form>
             </div>
-        </div>
-
-         <!-- Modal -->
-        <div id="recuperarSenha" class="modal">
-               <button class="btn-flat right right-align pull-s7 col s1 m1 l1 modal-close">X</button>
-              <form name="form" class="css-form" method="post" action="@Url.Action("RecuperarSenha", "UsuarioAtivo")">
-                <div class="modal-content">
-                    <h4>Esqueceu sua senha?</h4>
-
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <label for="Login">Informe seu e-mail</label>
-                            @Html.TextBox("Login", null, new { required = "required" })
+          </div>
+            <!-- Modal -->
+            <div id="recuperarSenha" class="modal">
+                <button class="btn-flat right right-align pull-s7 col s1 m1 l1 modal-close">X</button>
+                <form name="form" class="css-form" method="post" action="@Url.Action("RecuperarSenha", "UsuarioAtivo")">
+                    <div class="modal-content">
+                        <h4>Esqueceu sua senha?</h4>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12">
+                                <label for="Login">Informe seu e-mail</label>
+                                @Html.TextBox("Login", null, new { required = "required" })
+                            </div>
                         </div>
-
                     </div>
-
-                </div>
-                <div class="modal-footer">
+                    <div class="modal-footer">
                         <button class="btn-flat col s12 m4 l4 waves-effect waves-light light-blue darken-3 white-text" type="submit" name="Recuperar Senha">
                             Recuperar Senha
                         </button>
-                 </div>
-            </form>
-        </div>
-    }
+                    </div>
+                </form>
+            </div>
+            }
 </body>

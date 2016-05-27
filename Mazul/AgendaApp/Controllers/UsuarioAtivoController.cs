@@ -64,17 +64,17 @@ namespace AgendaApp.Controllers
 
                 if (!models.inserirUsuarioAtivo(usuarioAtivo)) 
                 {
-                    ModelState.AddModelError("PasswordError", "Vixe! Algo está errado em sua senha. :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula.");
+                    ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
                 }
                 else
                 {
-                    TempData["Sucesso"] = "Bem vindo ao Mazul! \\o/ \nEntre com seu login e senha e aproveite todos os recursos que preparamos para você! ^^";
+                    TempData["Sucesso"] = "Bem vindo ao Mazul! \\o/ \nEntre com seu login e senha e aproveite todos os recursos que preparamos para você!";
                     return RedirectToAction("Login","Home");
                 }
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Vixe! Alguns campos não estão preenchidos corretamente. :/");
+                ModelState.AddModelError("FieldsError", "Alguns campos não estão preenchidos corretamente :/");
             }
             return View();
         }
@@ -124,16 +124,16 @@ namespace AgendaApp.Controllers
 
 
                   //  models.editarUsuarioAtivo(usuarioAtivo, salt);
-                    TempData["Sucesso"] = "Pronto! Seus dados foram atualizados. ^^";
+                    TempData["Sucesso"] = "Seus dados foram atualizados ^^";
                     return RedirectToAction("Index");
                 }
                 catch(Exception e) {
-                    TempData["Erro"] = "Vixe! Houve algum erro ao atualizar seus dados. ><";
+                    TempData["Erro"] = "Houve algum erro ao atualizar seus dados ><";
                 }
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Vixe! Alguns campos não estão preenchidos corretamente. :/");
+                ModelState.AddModelError("FieldsError", "VAlguns campos não estão preenchidos corretamente :/");
             }
 
             return View();
@@ -150,36 +150,6 @@ namespace AgendaApp.Controllers
                 UsuarioAtivo usuarioAtivo = models.consultarUsuariosAtivosPorId((int)id);
                 return View(usuarioAtivo);
         }
-
-        // GET: UsuarioAtivo/Listar
-        //[HttpGet]
-        //public JsonResult Listar()
-        //{
-        //    try
-        //    {
-        //        var usuariosAtivos = models.consultarUsuariosAtivos();
-        //        var usuariosAtivosModels = new List<UsuarioAtivoModels>();
-
-        //        foreach (var usuarioAtivo in usuariosAtivos)
-        //        {
-        //            var usuarioAtivoModels = new UsuarioAtivoModels();
-        //            usuarioAtivoModels.Id = usuarioAtivo.Id;
-        //            usuarioAtivoModels.Nome = usuarioAtivo.Nome;
-        //            usuarioAtivoModels.Sobrenome = usuarioAtivo.Sobrenome;
-        //            usuarioAtivoModels.Endereco = usuarioAtivo.Endereco;
-        //            usuarioAtivoModels.Telefone = usuarioAtivo.Telefone;
-        //            usuarioAtivoModels.Email = usuarioAtivo.Email;
-        //            usuarioAtivoModels.Sexo = usuarioAtivo.Sexo;
-
-        //            usuariosAtivosModels.Add(usuarioAtivoModels);
-        //        }
-        //        return Json(usuariosAtivosModels, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json("Erro de comunicação com o banco de dados. - " + ex.Message);
-        //    }
-        //}
 
         // GET: UsuarioAtivo/RecuperarDados
         [HttpGet]
@@ -271,7 +241,7 @@ namespace AgendaApp.Controllers
                 //  return RedirectToAction("Editar", "UsuarioAtivo", new { id = usuarioAtivo.Id });
             }
             else {
-                ModelState.AddModelError("Erro", "Vixe! Parece que o seu link para recuperãção de senha expirou. :/ Clique em Esqueceu sua senha? e informe seu e-mail para que possamos enviar para seu e-mail um novo link. ;)");
+                TempData["Erro"] = "Parece que o seu link para recuperãção de senha expirou :/ \nClique em Esqueceu sua senha? e informe seu e-mail para que possamos enviar para seu e-mail um novo link";
             }
             
 
@@ -294,22 +264,22 @@ namespace AgendaApp.Controllers
 
                     if (!models.editarUsuarioAtivo(usuarioAtivo, salt))
                     {
-                        ModelState.AddModelError("PasswordError", "Vixe! Algo está errado em sua senha. :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula.");
+                        ModelState.AddModelError("PasswordError", "Algo está errado em sua senha :/ \nSua senha deve possuir no mínimo 7 caracteres, sendo obrigatório conter pelo menos um dígito, um caractere especial e uma letra maiúscula");
                     }
                     else
                     {
-                        TempData["Sucesso"] = "Salvo";
+                        TempData["Sucesso"] = "Sua senha foi redefinida. \nEntre com seu usuário e sua nova senha ^^";
                         return RedirectToAction("Index");
                     }
                 }
                 catch (Exception e)
                 {
-                    TempData["Erro"] = "Erro ao editar";
+                    TempData["Erro"] = "Parece que houve um erro ao redefinir sua senha :/";
                 }
             }
             else
             {
-                ModelState.AddModelError("FieldsError", "Vixe! Alguns campos não estão preenchidos corretamente. :/");
+                ModelState.AddModelError("FieldsError", "Alguns campos não estão preenchidos corretamente :/");
             }
 
             return View();
@@ -330,13 +300,13 @@ namespace AgendaApp.Controllers
                         models.editarSalt(usuarioAtivo, salt);
 
                         enviarEmail(usuarioAtivo, salt);
-                        TempData["Sucesso"] = "Pronto! Um link para redefinição de senha foi enviado para seu e-mail. o/";
+                        TempData["Sucesso"] = "Um link para redefinição de senha foi enviado para seu e-mail ^^";
                     } catch (SmtpException e) {
-                        ModelState.AddModelError("Erro", e.Message);
+                        TempData["Erro"] = e.Message;
                     }
                 }
                 else {
-                    ModelState.AddModelError("Erro", "Vixe! Não encontramos nenhum usuário cadastrado com esse e-mail. :/");
+                    TempData["Erro"] = "Não encontramos nenhum usuário cadastrado com esse e-mail :/";
                 }
             }
                        
@@ -345,7 +315,7 @@ namespace AgendaApp.Controllers
 
          private void enviarEmail(UsuarioAtivo usuarioAtivo, string salt) {
             string body = @"<html><body>
-                                          <p>Olá! <br /><br />" + usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome + ", você solicitou pelo nosso site ajuda para recuperar sua senha. Para voltar a aproveitar todas os recursos de nosso site você precisa criar uma nova senha, para isso basta clicar no link a seguir: </p> <p><strong>http://localhost:6272/usuarioAtivo/redefinirsenha/" + salt + "</strong></p><br /><p>Fácil né?!  Esperamos que tudo dê certo! ^^ <br /><br /> Atenciosamente, Equipe Mazul.</p></body></html>";
+                                          <p>Olá! <br /><br />" + usuarioAtivo.Nome + " " + usuarioAtivo.Sobrenome + ", você solicitou pelo nosso site ajuda para recuperar sua senha. Para voltar a aproveitar todas os recursos de nosso site você precisa criar uma nova senha, para isso basta clicar no link a seguir: </p> <p><strong>http://localhost:6272/usuarioAtivo/redefinirsenha/" + salt + "</strong></p><br /><p>Fácil né?!  Esperamos que tudo dê certo! ^^ <br /><br /> Atenciosamente, Mazul.</p></body></html>";
 
             try
             {
@@ -363,7 +333,7 @@ namespace AgendaApp.Controllers
             catch (SmtpException e)
             {
                 Console.WriteLine(e);
-                throw new SmtpException("Vixe! Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. >< \n Mas fique tranquilo, já estamos solucionando o problema. o/");
+                throw new SmtpException("Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha. >< \n Mas fique tranquilo, já estamos solucionando o problema o/");
             }
         }
     }
