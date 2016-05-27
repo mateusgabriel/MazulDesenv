@@ -90,7 +90,7 @@
                     <i class="material-icons prefix">phone</i>
                     @*<input id="telephone" name="telephone" ng-model="usuarioAtivo.Telefone" type="text" ng-minlength="13" ng-maxlength="14" placeholder="(85)9999-9999" required />*@
                     <label for="Telefone">Telefone</label>
-                    @Html.TextBoxFor(model => model.Telefone, new { required = "required", placeholder = "(99)9999-9999", type= "phone"})
+                    @Html.TextBoxFor(model => model.Telefone, new { required = "required"})
                     @*<div ng-show="form.$submitted || form.telephone.$touched">
                             <span style="color:red;" ng-show="form.telephone.$error.required">Campo Telefone é obrigatório.</span>
                             <span class="help-block" style="color:red;" ng-show="((form.telephone.$error.minlength || form.telephone.$error.maxlength) && form.telephone.$dirty) ">O campo Telefone deve conter no mínimo 13 caracteres.</span>
