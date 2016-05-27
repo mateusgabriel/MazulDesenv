@@ -135,7 +135,7 @@ namespace AgendaApp.Controllers
                         }
                         catch (SmtpException e)
                         {
-                            TempData["ErrorMail"] = "Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha >< \n Mas fique tranquilo, já estamos solucionando o problema o/";
+                            TempData["ErrorMail"] = "Parece que houve um problema e não conseguimos enviar para seu e-mail o link de recuperação de senha ><  Mas fique tranquilo, já estamos solucionando o problema o/";
                             //ModelState.AddModelError("ErrorMail", "Ocorreu um erro ao enviar email para contato. Fique tranquilo, já estamos solucionando o problema." + e);
                         }
 
